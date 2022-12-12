@@ -1,0 +1,30 @@
+// Required
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+// override css bootstrap
+// ======================
+// input
+$input-focus-bg: none;
+$input-focus-box-shadow: none;
+$input-focus-border-color: none;
+$input-focus-width: 0;
+
+// card
+$card-border-width: 0;
+$card-cap-bg: #FFF;
+
+// accordion
+$accordion-button-focus-border-color: none;
+$accordion-button-focus-box-shadow: none;
+
+// custom color maps (defined here..)
+$custom-colors: (
+  "custom-primary": #FFF5F0,
+  "custom-secondary": #001F3D,
+  "custom-star" : #FFBF00,
+  "custom-green": #5F8D4E,
+);
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);

@@ -1,0 +1,17 @@
+$font-family-inter: 'Inter', sans-serif;
+$font-color: #001F3D;
+
+.header-text{
+    font-family: $font-family-inter;
+    color: $font-color;
+}
+
+#header-title {
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+#header-subtitle {
+    font-weight: 400;
+    font-size: 1rem;
+}
