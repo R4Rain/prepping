@@ -5,7 +5,7 @@ git clone https://github.com/R4Rain/webprog-lec
 ```
 - Change terminal path to the repository directory
 ```
-cd webprog-lec
+cd <Directory_name>
 ```
 - Install dependencies by using composer
 ```
@@ -34,3 +34,34 @@ php artisan storage:link
 ```
 php artisan serve
 ``` 
+
+## Completed Features
+Guest:
+- Authentication pages, consisting of login, register, and log out (developed with laravel UI)
+- Home page
+- Recipes page: showing all recipes
+- Recipe page: showing an existing recipe and recipe reviews
+    - Create a review
+    - Edit a review
+    - Delete a review
+- Search page: contains searching and filtering features
+
+Authenticated user:
+- Create page: create a new recipe
+- My recipe page: show all user recipes
+- Profile page
+    - Edit user name & email (must provided with user password)
+
+## TODO
+- [ ] Edit / delete recipes in my recipe page
+- [ ] Add WYSIWYG editor for the textarea input in the create page
+- [ ] Image update / delete on user profile
+- [ ] Responsive issues and UI still looks bad :cry:
+- [ ] ... add if neccessary
+
+## Optional (?)
+- [ ] Meal planner
+- [ ] Wishlist
+- [ ] Subscription member
+
+
