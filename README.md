@@ -53,6 +53,7 @@ Authenticated user:
     - Edit user name & email (must provided with user password)
 
 ## TODO
+- [ ] Application name :sleepy:
 - [ ] Edit / delete recipes in my recipe page
 - [ ] Add WYSIWYG editor for the textarea input in the create page
 - [ ] Image update / delete on user profile
