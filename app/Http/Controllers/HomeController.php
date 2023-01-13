@@ -15,4 +15,11 @@ class HomeController extends Controller
             'categories' => Category::all()
         ]);
     }
+
+    public function search()
+    {
+        return view('search', [
+            'recipes' => Recipe::latest()->filter(request(['search', 'sort']))->paginate(16)->withQueryString(),
+        ]);
+    }
 }

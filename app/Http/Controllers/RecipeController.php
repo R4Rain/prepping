@@ -21,7 +21,8 @@ class RecipeController extends Controller
     public function index()
     {   
         return view('recipes.index', [
-            'categories' => Category::all()->take(10)
+            'categories' => Category::all()->take(5),
+            'recipes' => Recipe::all()
         ]);
     }
 

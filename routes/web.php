@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('search', [HomeController::class, 'search'])->name('search');
+
 
 Route::prefix('recipes')->name('recipes.')->group(function () {
     Route::get('manage', [RecipeController::class, 'manage'])->name('manage');
@@ -31,7 +33,6 @@ Route::resource('collections', CollectionController::class);
 Route::resource('collection-details', CollectionDetailController::class);
 Route::resource('ratings', RatingController::class);
 Route::resource('categories', CategoryController::class);
-
 
 
 

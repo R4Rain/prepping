@@ -13,8 +13,8 @@ class Category extends Model
     protected $timestamp = true;
     protected $guarded = [];
 
-    public function categories()
+    public function recipes()
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsToMany(Recipe::class, 'category_details');
     }
 }
