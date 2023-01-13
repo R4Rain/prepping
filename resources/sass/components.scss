@@ -1,3 +1,7 @@
+body {
+    background-color: #F7FAFC;
+}
+
 .btn-primary {
     --bs-btn-color: var(--bs-white);
     --bs-btn-hover-color: var(--bs-white);
@@ -29,6 +33,14 @@
     --bs-btn-active-color: var(--bs-primary);
 }
 
+.btn-reply {
+    --bs-btn-color: var(--bs-dark);
+    --bs-btn-bg: none;
+    --bs-btn-border-color: none;
+    --bs-btn-hover-bg: #{tint-color(#3D1D00, 75%)};
+    --bs-btn-active-bg: var(--bs-btn-hover-bg);
+}
+
 .bd-custom .btn {
     margin: 0.25rem 0.125rem
 }
@@ -36,4 +48,22 @@
 .container-fluid {
     padding-left: 2rem;
     padding-right: 2rem;
+}
+
+.navbar {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#header {
+    padding: 2rem 0;
+}
+
+#subscription {
+    padding: 8rem 0;
+    background-color: #3d1d0014;
+}
+
+#recipe {
+    padding: 6rem 0;
 }

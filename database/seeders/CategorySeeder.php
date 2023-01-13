@@ -11,136 +11,108 @@ class CategorySeeder extends Seeder
     {
         DB::table('categories')->insert([
             [
-                'category_head_id' => 1,
-                'name' => 'Afternoon Tea'
+                'name' => 'Biscuit',
+                'photo' => 'Biscuit.jpg'
             ],
             [
-                'category_head_id' => 1,
-                'name' => 'Biscuit'
+                'name' => 'Cake',
+                'photo' => 'Cake.jpg'
             ],
             [
-                'category_head_id' => 1,
-                'name' => 'Brownies'
+                'name' => 'Cookie',
+                'photo' => 'Cookie.jpg'
             ],
             [
-                'category_head_id' => 1,
-                'name' => 'Cake'
+                'name' => 'Dough & Bread',
+                'photo' => 'Dough & Bread.jpg'
             ],
             [
-                'category_head_id' => 1,
-                'name' => 'Cookie'
+                'name' => 'Pastry & Pie',
+                'photo' => 'Pastry & Pie.jpg'
             ],
             [
-                'category_head_id' => 1,
-                'name' => 'Dough & Bread'
+                'name' => 'African',
+                'photo' => 'African.jpg'
             ],
             [
-                'category_head_id' => 1,
-                'name' => 'Pastry & Pie'
+                'name' => 'Americas',
+                'photo' => 'Americas.jpg'
             ],
             [
-                'category_head_id' => 2,
-                'name' => 'African'
+                'name' => 'Asian',
+                'photo' => 'Asian.jpg'
             ],
             [
-                'category_head_id' => 2,
-                'name' => 'Americas'
+                'name' => 'European',
+                'photo' => 'European.jpg'
             ],
             [
-                'category_head_id' => 2,
-                'name' => 'Asian'
+                'name' => 'Beef',
+                'photo' => 'Beef.jpg'
             ],
             [
-                'category_head_id' => 2,
-                'name' => 'European'
+                'name' => 'Chicken',
+                'photo' => 'Chicken.jpg'
             ],
             [
-                'category_head_id' => 2,
-                'name' => 'Oceanic'
+                'name' => 'Fish',
+                'photo' => 'Fish.jpg'
             ],
             [
-                'category_head_id' => 3,
-                'name' => 'Beef'
+                'name' => 'Fruit',
+                'photo' => 'Fruit.jpg'
             ],
             [
-                'category_head_id' => 3,
-                'name' => 'Chicken'
+                'name' => 'Lamb',
+                'photo' => 'Lamb.jpg'
             ],
             [
-                'category_head_id' => 3,
-                'name' => 'Eggs'
+                'name' => 'Prawn',
+                'photo' => 'Prawn.jpg'
             ],
             [
-                'category_head_id' => 3,
-                'name' => 'Fish'
+                'name' => 'Rice',
+                'photo' => 'Rice.jpg'
             ],
             [
-                'category_head_id' => 3,
-                'name' => 'Fruit'
+                'name' => 'Vegetables',
+                'photo' => 'Vegetables.jpg'
             ],
             [
-                'category_head_id' => 3,
-                'name' => 'Lamb'
+                'name' => 'Breakfast & Brunch',
+                'photo' => 'Breakfast & Brunch.jpg'
             ],
             [
-                'category_head_id' => 3,
-                'name' => 'Prawn'
+                'name' => 'Desserts',
+                'photo' => 'Desserts.jpg'
             ],
             [
-                'category_head_id' => 3,
-                'name' => 'Rice'
+                'name' => 'Dinner',
+                'photo' => 'Dinner.jpg'
             ],
             [
-                'category_head_id' => 3,
-                'name' => 'Vegetables'
+                'name' => 'Drinks',
+                'photo' => 'Drinks.jpg'
             ],
             [
-                'category_head_id' => 4,
-                'name' => 'Breakfast & Brunch'
+                'name' => 'Lunch',
+                'photo' => 'Lunch.jpg'
             ],
             [
-                'category_head_id' => 4,
-                'name' => 'Desserts'
+                'name' => 'Christmas',
+                'photo' => 'Christmas.jpg'
             ],
             [
-                'category_head_id' => 4,
-                'name' => 'Dinner'
+                'name' => 'Eid Al-Fitr',
+                'photo' => 'Eid Al-Fitr.jpg'
             ],
             [
-                'category_head_id' => 4,
-                'name' => 'Drinks'
+                'name' => 'Halloween',
+                'photo' => 'Halloween.jpg'
             ],
             [
-                'category_head_id' => 4,
-                'name' => 'Lunch'
-            ],
-            [
-                'category_head_id' => 4,
-                'name' => 'Side Dishes'
-            ],
-            [
-                'category_head_id' => 5,
-                'name' => 'Chinese New Year'
-            ],
-            [
-                'category_head_id' => 5,
-                'name' => 'Christmas'
-            ],
-            [
-                'category_head_id' => 5,
-                'name' => 'Eid Al-Fitr'
-            ],
-            [
-                'category_head_id' => 5,
-                'name' => 'Halloween'
-            ],
-            [
-                'category_head_id' => 5,
-                'name' => 'New Year'
-            ],
-            [
-                'category_head_id' => 5,
-                'name' => "Valentine's Day"
+                'name' => "Valentine's Day",
+                'photo' => "Valentine's Day.jpg"
             ],
         ]);
     }

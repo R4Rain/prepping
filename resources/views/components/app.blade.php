@@ -28,8 +28,10 @@
         </main>
     </div>
 
-    <x-login></x-login>
-    <x-register></x-register>
+    @if (!auth()->check())
+        <x-login></x-login>
+        <x-register></x-register>
+    @endif
 </body>
 
 </html>

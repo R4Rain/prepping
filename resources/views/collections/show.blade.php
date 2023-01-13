@@ -10,7 +10,7 @@
         <div class="row row-cols-4">
             @foreach ($collection->recipes as $recipe)
                 <div class="col">
-                    <x-card-recipe :recipe='$recipe'></x-card-recipe>
+                    <x-recipe :recipe='$recipe'></x-recipe>
                 </div>
             @endforeach
         </div>

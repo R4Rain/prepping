@@ -22,18 +22,18 @@
                             </div>
 
                             <div class="mb-4">
-                                <label for="category" class="form-label">Category</label>
+                                <label for="subCategory" class="form-label">Filter</label>
                                 <div class="bd-custom">
-                                    @foreach ($categories as $category)
-                                        <input class="btn-check" type="checkbox" name="categories[]"
-                                            value="{{ $category['id'] }}" id="{{ $category['id'] }}"
-                                            {{ $category['checked'] == 1 ? 'checked' : '' }}>
-                                        <label for="{{ $category['id'] }}"
-                                            class="btn btn-outline-check rounded-pill">{{ $category['name'] }}</label>
+                                    @foreach ($subCategories as $subCategory)
+                                        <input class="btn-check" type="checkbox" name="sub_categories[]"
+                                            value="{{ $subCategory['id'] }}" id="{{ $subCategory['id'] }}"
+                                            {{ $subCategory['checked'] == 1 ? 'checked' : '' }}>
+                                        <label for="{{ $subCategory['id'] }}"
+                                            class="btn btn-outline-check rounded-pill">{{ $subCategory['name'] }}</label>
                                     @endforeach
                                 </div>
 
-                                @error('category')
+                                @error('subCategory')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>

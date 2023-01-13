@@ -1,19 +1,25 @@
-<nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+<nav class="navbar navbar-expand-lg bg-white">
     <div class="container-fluid py-1">
-        <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="/storage/assets/logo_text.png" alt="Meal2Go" width="130">
+        <a class="navbar-brand me-5" href="{{ route('home') }}">
+            <img src="/storage/assets/logo-text.png" alt="prepping" width="130">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                {{-- <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li> --}}
+                    <a class="nav-link" href="{{ route('recipes.index') }}">Recipes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Learn to Cook</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Community</a>
+                </li>
             </ul>
 
             @if (auth()->check())
@@ -28,7 +34,7 @@
 
                         <ul class="dropdown-menu dropdown-menu-end border-0 p-1 shadow-sm">
                             <li>
-                                <a href="{{ route('recipes.index') }}" type="button"
+                                <a href="{{ route('recipes.manage') }}" type="button"
                                     class="dropdown-item p-2 rounded-3 text-muted">
                                     <i class="bi bi-book me-1"></i> {{ __('My Recipes') }}
                                 </a>

@@ -35,6 +35,8 @@ class CollectionDetailController extends Controller
      */
     public function store(Request $request)
     {   
+        dd($request);
+
         $data = [];
         foreach ($request->collections as $collection) {
             $data[] = [

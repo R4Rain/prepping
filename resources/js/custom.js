@@ -1,11 +1,17 @@
 $(document).ready(function () {
-    ClassicEditor
-        .create(document.querySelector('#description'), {
-            toolbar: [ 'heading', '|', 'bold', 'italic', 'bulletedList', 'numberedList' ]
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
+    $('#photo').change(function() {
+        const file = this.files[0];
+        console.log(file);
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function(event) {
+                console.log(event.target.result);
+                $('#card-img').prop('hidden', true);
+                $('#img-preview').attr('src', event.target.result).prop('hidden', false);
+            }
+            reader.readAsDataURL(file);
+        }
+    });
     
     ClassicEditor
         .create(document.querySelector('#ingredients'), {
@@ -16,22 +22,12 @@ $(document).ready(function () {
         } );
     
     ClassicEditor
-        .create(document.querySelector('#steps'), {
+        .create(document.querySelector('#instructions'), {
             toolbar: [ 'heading', '|', 'bold', 'italic', 'bulletedList', 'numberedList' ]
         } )
         .catch( error => {
             console.error( error );
-        } );
-    
-    
-    $('.input-spinner').inputSpinner({
-        template:
-            '<div class="input-group ${groupClass}">' +
-            '<button style="min-width: ${buttonsWidth};" class="btn btn-decrement btn-outline-light" type="button">${decrementButton}</button>' +
-            '<input type="text" inputmode="decimal" style="text-align: ${textAlign};" class="form-control">' +
-            '<button style="min-width: ${buttonsWidth};" class="btn btn-increment btn-outline-light" type="button">${incrementButton}</button>' +
-            '</div>'
-    })
+        });
 
     $('#comment').on('keyup', function () {
         if ($(this).val() != '') {

@@ -16,6 +16,13 @@ class RecipeController extends Controller
     public function index()
     {   
         return view('recipes.index', [
+            'categories' => Category::all()
+        ]);
+    }
+
+    public function manage()
+    {   
+        return view('recipes.manage', [
             'recipes' => auth()->user()->recipes
         ]);
     }
@@ -28,26 +35,26 @@ class RecipeController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   
         $this->validateRequest($request);
-
+    
         DB::transaction(function () use($request) {
-            if ($request->has('image')) {
-                $extension = $request->file('image')->getClientOriginalExtension();
+            if ($request->has('photo')) {
+                $extension = $request->file('photo')->getClientOriginalExtension();
                 $proofNameToStore = $request->input('name') . '.' . $extension;
-                $request->file('image')->storeAs('public/recipes', $proofNameToStore);
+                $request->file('photo')->storeAs('public/recipes', $proofNameToStore);
             }
-
+            
             $recipe = Recipe::create([
                 'user_id' => auth()->user()->id,
                 'name' => $request->name,
-                'image' => $proofNameToStore,
+                'photo' => $proofNameToStore,
                 'description' => $request->description,
                 'ingredients' => $request->ingredients,
-                'steps' => $request->steps,
-                'duration' => $request->duration,
-                'serving' => $request->serving,
-                'duration' => $request->duration
+                'instructions' => $request->instructions,
+                'servings' => $request->servings,
+                'prep_time' => $request->prep_hours * 60 + $request->prep_minutes,
+                'cook_time' => $request->cook_hours * 60 + $request->cook_minutes
             ]);
             
             $data = [];
@@ -99,27 +106,27 @@ class RecipeController extends Controller
         $this->validateRequest($request);
 
         DB::transaction(function () use($request, $recipe) {
-            if ($request->hasFile('image')) {
-                if ($recipe->image != NULL)
-                    Storage::delete('public/recipes/' . $recipe->image);
+            if ($request->hasFile('photo')) {
+                if ($recipe->photo != NULL)
+                    Storage::delete('public/recipes/' . $recipe->photo);
                 
-                $extension = $request->file('image')->getClientOriginalExtension();
+                $extension = $request->file('photo')->getClientOriginalExtension();
                 $proofNameToStore = $request->input('name') . '.' . $extension;
-                $request->file('image')->storeAs('public/recipes/', $proofNameToStore);
+                $request->file('photo')->storeAs('public/recipes/', $proofNameToStore);
             } else {
-                $proofNameToStore = $recipe->image;
+                $proofNameToStore = $recipe->photo;
             }
-            
+
             $recipe->update([
                 'user_id' => auth()->user()->id,
                 'name' => $request->name,
-                'image' => $proofNameToStore,
+                'photo' => $proofNameToStore,
                 'description' => $request->description,
                 'ingredients' => $request->ingredients,
-                'steps' => $request->steps,
-                'duration' => $request->duration,
-                'serving' => $request->serving,
-                'duration' => $request->duration
+                'instructions' => $request->instructions,
+                'servings' => $request->servings,
+                'prep_time' => $request->prep_hours * 60 + $request->prep_minutes,
+                'cook_time' => $request->cook_hours * 60 + $request->cook_minutes
             ]);
         });
 
@@ -135,13 +142,12 @@ class RecipeController extends Controller
     {   
         $request->validate([
             'name' => 'required|string',
-            'category.*' => 'required|integer',
+            'categories.*' => 'required|integer',
             'description' => 'required|string',
             'ingredients' => 'required|string',
-            'steps' => 'required|string',
-            'duration' => 'required|integer',
-            'serving' => 'required|integer',
-            'image' => 'image|mimes:jpeg,jpg,png,webp'
+            'instructions' => 'required|string',
+            'servings' => 'required|integer',
+            'photo' => 'image|mimes:jpeg,jpg,png,webp'
         ]);
     }
 }

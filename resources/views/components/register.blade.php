@@ -1,6 +1,6 @@
 <div class="modal fade" id="register" tabindex="-1">
     <div class="modal-dialog">
-        <div class="modal-content border-0">
+        <div class="modal-content border-0 rounded-4">
             <div class="modal-body p-5">
                 <div class="text-center mb-4">
                     <img src="/storage/assets/logo.png" alt="Prepping" width="40" class="mb-3">

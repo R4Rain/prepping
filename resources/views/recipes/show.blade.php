@@ -1,202 +1,156 @@
 <x-app title="{!! $recipe->name !!}">
-    <div class="container p-5">
-        <div class="row g-5 mb-5">
-            <div class="col">
-                <h3>{{ $recipe->name }}</h3>
-                <div>
-                    @foreach ($recipe->categories as $category)
-                        <span class="badge bg-secondary rounded-pill">{{ $category->name }}</span>
-                    @endforeach
-                </div>
-                <div class="my-4">{!! $recipe->description !!}</div>
-                <div class="card border-0 bg-light rounded-4 mb-4">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col text-center">
-                                <i class="bi bi-star-fill fs-2 text-primary"></i>
-                                <h6>4.0</h6>
-                            </div>
-                            <div class="col text-center">
-                                <i class="bi bi-clock fs-2 text-primary"></i>
-                                <h6>{{ $recipe->duration }} mins</h6>
-                            </div>
-                            <div class="col text-center">
-                                <i class="bi bi-cup-hot fs-2 text-primary"></i>
-                                <h6>{{ $recipe->serving }} serves</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @if ($recipe->user_id == auth()->user()->id)
-                    <div class="row g-2">
-                        <div class="col-md-6">
-                            <a type="button" href="{{ route('recipes.edit', $recipe) }}"
-                                class="btn btn-outline-primary w-100">Edit</a>
-                        </div>
-                        <div class="col-md-6">
-                            <a type="button" href="{{ route('recipes.edit', $recipe) }}"
-                                class="btn btn-outline-primary w-100">Delete</a>
-                        </div>
-                    </div>
-                @endif
-            </div>
-            <div class="col-4">
-                <img src="/storage/recipes/{{ $recipe->image }}" width="100%" class="rounded-4 mb-4">
-                @if ($recipe->user_id != auth()->user()->id)
-                    <button type="button" class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-                        data-bs-target="#show-collection">
-                        Add to collection
-                    </button>
-                @endif
-            </div>
-        </div>
+    <div class="container-lg p-5">
+        <div class="row justify-content-center">
+            <div class="col-md-11">
+                <div class="card border-0 rounded-4 shadow-sm">
+                    <div class="card-body p-5">
+                        <div class="row g-5 mb-4">
+                            <div class="col">
+                                <h2>{{ $recipe->name }}</h2>
+                                <small>
+                                    Recipe by <b>{{ $recipe->user->name }}</b> | Published on
+                                    {{ date('F j, Y', strtotime($recipe->created_at)) }}
+                                </small>
+                                <div class="my-2">
+                                    @foreach ($recipe->categories as $category)
+                                        <span class="badge bg-secondary rounded-pill">{{ $category->name }}</span>
+                                    @endforeach
+                                </div>
 
-        <div class="mb-5">
-            <h4 class="mb-3">Ingredients</h4>
-            <div>{!! $recipe->ingredients !!}</div>
-        </div>
+                                <div class="my-4 text-muted">
+                                    {!! $recipe->description !!}
+                                </div>
 
-        <div>
-            <h4 class="mb-3">Steps</h4>
-            <div>{!! $recipe->steps !!}</div>
-        </div>
-
-        <hr class="my-5" style="border-style: dashed">
-
-        {{-- COMMENTS --}}
-        <h4 class="mb-3">{{ $recipe->comments->count() }} comments</h4>
-
-        @if (auth()->check())
-            @if ($recipe->user_id != auth()->user()->id)
-                <form method="POST" action="{{ route('comments.store') }}" enctype="multipart/form-data">
-                    @csrf
-
-                    <input type="hidden" name="recipe_id" value="{{ $recipe->id }}">
-
-                    <div class="d-flex align-items-start gap-3 mb-2">
-                        <i class="bi bi-person-square fs-1 text-muted"></i>
-                        <div class="form-floating w-100">
-                            <textarea class="form-control border-0 bg-light" id="comment" name="comment">{{ old('comment') }}</textarea>
-                            <label for="comment">Add a comment</label>
-                        </div>
-
-                        @error('comment')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-
-                    <div class="text-end mb-4">
-                        <button type="submit" id="btnComment" class="btn btn-primary rounded-3"
-                            disabled>Comment</button>
-                    </div>
-                </form>
-            @endif
-        @else
-            <div class="card border-0 bg-light rounded-4">
-                <div class="card-body py-4 text-center text-muted">
-                    <i class="bi bi-lock-fill fs-1"></i>
-                    <div class="mt-2">Login first to add a comment</div>
-                </div>
-            </div>
-        @endif
-
-        @forelse ($recipe->comments as $comment)
-            <div class="card border-0 bg-light rounded-4">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <small>
-                            <b>{{ $comment->user->name }}</b>
-                            <span class="text-muted">{{ $comment->getCreatedTime($comment->created_at) }}</span>
-                        </small>
-                        <i class="bi bi-three-dots-vertical"></i>
-                    </div>
-                    <div>{{ $comment->content }}</div>
-                </div>
-            </div>
-        @empty
-        @endforelse
-    </div>
-
-    <div class="modal fade" id="show-collection" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content border-0">
-                <div class="modal-body p-5">
-                    <div class="mb-4">
-                        <h4 class="text-center">Add to collection</h4>
-                        <small class="text-muted">You can save recipe to a new collection or existing
-                            collection.</small>
-                    </div>
-
-                    <form method="POST" action="{{ route('collection-details.store') }}">
-                        @csrf
-
-                        <input type="hidden" value="{{ $recipe->id }}" name="recipe_id">
-
-                        <div class="mb-4">
-                            @forelse (auth()->user()->collections as $collection)
-                                <div class="card rounded-4">
-                                    <div class="card-body">
-                                        <div class="row g-0">
-                                            <div class="col">
-                                                <h6>{{ $collection->name }}</h6>
-                                                <small>{{ $collection->recipes->count() }} recipes</small>
-                                            </div>
-                                            <div class="col-1 my-auto text-end">
-                                                <input class="form-check-input" type="checkbox" name="collections[]"
-                                                    value="{{ $collection->id }}" id="{{ $collection->id }}">
-                                            </div>
+                                <div class="card border-0 bg-light rounded-3">
+                                    <div class="card-body d-flex justify-content-center align-items-center gap-5">
+                                        <div>
+                                            <i class="bi bi-star-fill text-primary me-1"></i>
+                                            4.0
+                                        </div>
+                                        <div>
+                                            <i class="bi bi-clock text-primary me-1"></i>
+                                            <span class="me-2">
+                                                <span class="text-muted">Prep: </span>{{ $recipe->prep_time }}min
+                                            </span>
+                                            <span>
+                                                <span class="text-muted">Cook: </span>{{ $recipe->cook_time }}min
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <i class="bi bi-cup-hot text-primary me-1"></i>
+                                            {{ $recipe->servings }} servings
                                         </div>
                                     </div>
                                 </div>
-                            @empty
-                                <div class="card border-0 bg-light rounded-4">
-                                    <div class="card-body text-center">
-                                        <h6>Find your collection in here</h6>
+                            </div>
+                            <div class="col-4">
+                                <img src="/storage/recipes/{{ $recipe->photo }}" width="100%" class="rounded-4 mb-3">
+                                <div class="row g-2">
+                                    <div class="col">
+                                        <button type="button" class="btn btn-primary rounded-3 w-100"
+                                            data-bs-toggle="modal" data-bs-target="#collection">
+                                            <i class="bi bi-bookmark me-1"></i> Save
+                                        </button>
+                                    </div>
+                                    <div class="col">
+
+                                        <button type="button" class="btn btn-outline-primary rounded-3 w-100">
+                                            <i class="bi bi-star me-1"></i> Rate
+                                        </button>
                                     </div>
                                 </div>
-                            @endforelse
+                            </div>
                         </div>
 
-                        <div class="d-grid gap-2">
-                            <button type="button" class="btn btn-outline-primary rounded-3" data-bs-toggle="modal"
-                                data-bs-target="#create-collection">
-                                Create new collection
-                            </button>
-                            <button type="submit" class="btn btn-primary rounded-3"
-                                {{ auth()->user()->collections->count() < 1? 'disabled': '' }}>
-                                Save changes
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+                        <hr class="my-5" style="border-style: dashed">
 
-    <div class="modal fade" id="create-collection" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content border-0">
-                <div class="modal-body p-5">
-                    <h4 class="text-center mb-4">Create new collection</h4>
-
-                    <form method="POST" action="{{ route('collections.store') }}">
-                        @csrf
-
-                        <div class="mb-4">
-                            <label for="name" class="form-label">Collection name</label>
-                            <input id="name" type="text" class="form-control" name="name" required>
-
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                        <h4 class="mb-4">Ingredients</h4>
+                        <div class="mb-5">
+                            {!! $recipe->ingredients !!}
                         </div>
 
-                        <button type="submit" class="btn btn-primary w-100 rounded-3">
-                            {{ __('Confirm') }}
-                        </button>
-                    </form>
+                        <hr class="my-5" style="border-style: dashed">
+
+                        <h4 class="mb-4">Directions</h4>
+                        <div class="mb-5">
+                            {!! $recipe->instructions !!}
+                        </div>
+
+                        <hr class="my-5" style="border-style: dashed">
+
+                        <h4 class="mb-4">Discussion</h4>
+                        <form method="POST" action="{{ route('comments.store') }}">
+                            @csrf
+
+                            <input type="hidden" name="recipe_id" value="{{ $recipe->id }}">
+
+                            <div class="row g-3 mb-4">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <textarea class="form-control rounded-3" placeholder="What's your thought?" id="comment" name="comment"></textarea>
+                                        <label for="comment">What's your thought?</label>
+                                    </div>
+
+                                    @error('comment')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-2">
+                                    <button type="submit" class="btn btn-primary rounded-3 w-100">Comment</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        @forelse ($recipe->comments as $comment)
+                            <div class="card border-0 bg-light rounded-4">
+                                <div class="card-body">
+                                    <small class="fw-bold">{{ $comment->user->name }}</small>
+                                    <div class="mb-2">{{ $comment->content }}</div>
+
+                                    <small class="text-muted" style="font-size: 13px">
+                                        {{ $comment->getCreatedTime($comment->created_at) }}
+                                    </small>
+                                    <button class="btn btn-reply btn-sm rounded-pill ms-2" style="font-size: 13px">
+                                        Reply
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2" hidden>
+                                <form method="POST" action="{{ route('replies.store') }}" class="col offset-1">
+                                    @csrf
+
+                                    <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+
+                                    <div class="mb-2">
+                                        <div class="form-floating">
+                                            <textarea class="form-control border-0 bg-light" id="reply" name="reply">{{ old('comment') }}</textarea>
+                                            <label for="reply">Write a reply</label>
+                                        </div>
+
+                                        @error('reply')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+
+                                    <div class="text-end">
+                                        <button type="submit" id="btnComment" class="btn btn-primary rounded-3"
+                                            disabled>Reply</button>
+                                    </div>
+                                </form>
+                            </div>
+                        @empty
+                            <div class="card border-0 bg-light rounded-4 mb-4">
+                                <div class="card-body p-5">
+                                    <h5 class="text-center">0 comments</h5>
+                                </div>
+                            </div>
+                        @endforelse
+
+                        @if (auth()->check())
+                            <x-collection :recipe='$recipe'></x-collection>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

@@ -12,4 +12,9 @@ class Category extends Model
     protected $primaryKey = 'id';
     protected $timestamp = true;
     protected $guarded = [];
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }

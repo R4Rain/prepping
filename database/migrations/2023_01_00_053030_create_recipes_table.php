@@ -18,12 +18,13 @@ class CreateRecipesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
-            $table->string('image');
+            $table->string('photo');
             $table->longText('description');
             $table->longText('ingredients');
-            $table->longText('steps');
-            $table->integer('duration');
-            $table->integer('serving');
+            $table->longText('instructions');
+            $table->integer('servings');
+            $table->integer('prep_time');
+            $table->integer('cook_time');
             $table->boolean('premium')->default(false);
             $table->timestamps();
         });
