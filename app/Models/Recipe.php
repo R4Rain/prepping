@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 
 class Recipe extends Model
 {
@@ -27,6 +29,22 @@ class Recipe extends Model
                 return $query->orderBy('created_at', 'DESC');
             }
         });
+    }
+
+    public function getPrepHoursAttribute(){
+        return round($this->prep_time / 60);
+    }
+
+    public function getCookHoursAttribute(){
+        return round($this->cook_time / 60);
+    }
+
+    public function getPrepMinutesAttribute(){
+        return $this->prep_time % 60;
+    }
+
+    public function getCookMinutesAttribute(){
+        return $this->cook_time % 60;
     }
 
     public function user()
