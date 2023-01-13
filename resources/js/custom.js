@@ -36,7 +36,6 @@ $(document).ready(function () {
             $('#btnComment').prop('disabled', true)
         }
     })
-
     // const alert = new bootstrap.Modal('#alert')
     // alert.show();
 

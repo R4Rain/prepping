@@ -25,7 +25,7 @@
                                     <div class="card-body d-flex justify-content-center align-items-center gap-5">
                                         <div>
                                             <i class="bi bi-star-fill text-primary me-1"></i>
-                                            4.0
+                                            {{ $average_rate ? round($average_rate, 1) : "No ratings"}}
                                         </div>
                                         <div>
                                             <i class="bi bi-clock text-primary me-1"></i>
@@ -173,20 +173,24 @@
     </div>
 
     <div class="modal fade" id="rate" tabindex="-1">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0">
                 <div class="modal-body p-5">
                     <div class="mb-4">
                         <h4 class="text-center">Give Rating</h4>
                     </div>
-
                     <form method="POST" action="{{ route('ratings.store') }}">
                         @csrf
 
                         <input type="hidden" value="{{ $recipe->id }}" name="recipe_id">
-
-
-
+                        <div>
+                            <button id="rate-1" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="1"><i class="bi bi-star-fill"></i></button>
+                            <button id="rate-2" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="2"><i class="bi bi-star-fill"></i></button>
+                            <button id="rate-3" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="3"><i class="bi bi-star-fill"></i></button>
+                            <button id="rate-4" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="4"><i class="bi bi-star-fill"></i></button>
+                            <button id="rate-5" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="5"><i class="bi bi-star-fill"></i></button>
+                            <input type="text" value="0" id="input-rating" name="value" hidden>
+                        </div>
                         <button type="submit" class="btn btn-primary rounded-3">
                             Confirm
                         </button>
@@ -195,4 +199,36 @@
             </div>
         </div>
     </div>
+    <script>
+        // Global variable
+        const MAX_STARS = 5;
+        const CURR_STYLE = "px-0 py-0 border-0 bg-transparent";
+        var ratings = [];
+
+        function changeStar(index){
+            for(var i = 1;i <= MAX_STARS;i++){
+                if(i <= index) ratings[i-1].className = CURR_STYLE + " text-primary";
+                else ratings[i-1].className = CURR_STYLE + " text-secondary";
+            }
+        }
+
+        function handleRate(e){
+            var index = e.currentTarget.value;
+            changeStar(index);
+            document.getElementById('input-rating').value = index;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            for(var i = 1;i <= MAX_STARS;i++){
+                ratings.push(document.getElementById('rate-' + i));
+                if(ratings[i-1]){
+                    ratings[i-1].addEventListener('click', handleRate);
+                }
+            }
+            var el = document.getElementById('input-rating');
+            if(el){
+                changeStar(el.value);
+            }
+        });
+    </script>    
 </x-app>
