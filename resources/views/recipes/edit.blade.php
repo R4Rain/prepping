@@ -5,7 +5,7 @@
             <div class="col-md-8">
                 <div class="card border-0 shadow-sm rounded-4">
                     <div class="card-body p-5 pt-4">
-                        <form method="POST" action="{{ route('recipes.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('recipes.update', $recipe) }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="d-flex justify-content-between align-items-center bg-white py-4 mb-5 sticky-top">
@@ -14,6 +14,8 @@
                                         <i class="bi bi-arrow-left me-2"></i></a>
                                     Edit Recipe
                                 </h4>
+
+                                @method('put')
                                 <button type="submit" class="btn btn-primary rounded-3 px-4">Save</button>
                             </div>
 
@@ -100,15 +102,15 @@
                                         <div class="col">
                                             <div class="input-group">
                                                 <span class="input-group-text">Hours</span>
-                                                <input type="number" class="form-control" name="prep_hours" value="{{ $recipe->prep_hours }}"
-                                                    placeholder="0">
+                                                <input type="number" class="form-control" name="prep_hours"
+                                                    value="{{ $recipe->prep_hours }}" placeholder="0">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="input-group">
                                                 <span class="input-group-text">Minutes</span>
-                                                <input type="number" class="form-control" name="prep_minutes" value="{{ $recipe->prep_minutes }}"
-                                                    placeholder="0">
+                                                <input type="number" class="form-control" name="prep_minutes"
+                                                    value="{{ $recipe->prep_minutes }}" placeholder="0">
                                             </div>
                                         </div>
                                     </div>
@@ -121,15 +123,15 @@
                                         <div class="col">
                                             <div class="input-group">
                                                 <span class="input-group-text">Hours</span>
-                                                <input type="number" class="form-control" name="cook_hours" value="{{ $recipe->cook_hours }}"
-                                                    placeholder="0">
+                                                <input type="number" class="form-control" name="cook_hours"
+                                                    value="{{ $recipe->cook_hours }}" placeholder="0">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="input-group">
                                                 <span class="input-group-text">Minutes</span>
-                                                <input type="number" class="form-control" name="cook_minutes" value="{{ $recipe->cook_minutes }}"
-                                                    placeholder="0">
+                                                <input type="number" class="form-control" name="cook_minutes"
+                                                    value="{{ $recipe->cook_minutes }}" placeholder="0">
                                             </div>
                                         </div>
                                     </div>

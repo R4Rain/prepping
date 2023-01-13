@@ -18,7 +18,7 @@ class Recipe extends Model
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
-            return $query->where('title', 'like', '%' . $search . '%');
+            return $query->where('name', 'like', '%' . $search . '%');
         });
         $query->when($filters['sort'] ?? false, function ($query, $sort) {
             if($sort == 2){
