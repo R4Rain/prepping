@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class Customer
+class User
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,11 @@ class Customer
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
-    {
+    {   
+        if (auth()->user()->role !== 'CUSTOMER') {
+            return redirect()->back()->with('error', 'Not authorized!');
+        }
+        
         return $next($request);
     }
 }

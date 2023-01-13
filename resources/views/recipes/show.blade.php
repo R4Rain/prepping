@@ -46,18 +46,33 @@
                             <div class="col-4">
                                 <img src="/storage/recipes/{{ $recipe->photo }}" width="100%" class="rounded-4 mb-3">
                                 <div class="row g-2">
-                                    <div class="col">
-                                        <button type="button" class="btn btn-primary rounded-3 w-100"
-                                            data-bs-toggle="modal" data-bs-target="#collection">
-                                            <i class="bi bi-bookmark me-1"></i> Save
-                                        </button>
-                                    </div>
-                                    <div class="col">
+                                    @if ($recipe->user->id != auth()->user()->id)
+                                        <div class="col">
+                                            <button type="button" class="btn btn-primary rounded-3 w-100"
+                                                data-bs-toggle="modal" data-bs-target="#collection">
+                                                <i class="bi bi-bookmark me-1"></i> Save
+                                            </button>
+                                        </div>
+                                        <div class="col">
 
-                                        <button type="button" class="btn btn-outline-primary rounded-3 w-100">
-                                            <i class="bi bi-star me-1"></i> Rate
-                                        </button>
-                                    </div>
+                                            <button type="button" class="btn btn-outline-primary rounded-3 w-100">
+                                                <i class="bi bi-star me-1"></i> Rate
+                                            </button>
+                                        </div>
+                                    @else
+                                        <div class="col">
+                                            <a href="{{ route('recipes.edit', $recipe) }}"
+                                                class="btn btn-primary rounded-3 w-100">
+                                                <i class="bi bi-pencil me-1"></i> Edit
+                                            </a>
+                                        </div>
+                                        <div class="col">
+
+                                            <button type="button" class="btn btn-outline-primary rounded-3 w-100">
+                                                <i class="bi bi-trash3 me-1"></i> Delete
+                                            </button>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -156,12 +171,12 @@
         </div>
     </div>
 
-    <div class="modal fade" id="collection" tabindex="-1">
+    <div class="modal fade" id="rate" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content border-0">
                 <div class="modal-body p-5">
                     <div class="mb-4">
-                        <h4 class="text-center">Add to collection</h4>
+                        <h4 class="text-center">Give Rating</h4>
                         <small class="text-muted">You can save recipe to a new collection or existing
                             collection.</small>
                     </div>
@@ -171,41 +186,11 @@
 
                         <input type="hidden" value="{{ $recipe->id }}" name="recipe_id">
 
-                        <div class="mb-4">
-                            @forelse (auth()->user()->collections as $collection)
-                                <div class="card rounded-4">
-                                    <div class="card-body">
-                                        <div class="row g-0">
-                                            <div class="col">
-                                                <h6>{{ $collection->name }}</h6>
-                                                <small>{{ $collection->recipes->count() }} recipes</small>
-                                            </div>
-                                            <div class="col-1 my-auto text-end">
-                                                <input class="form-check-input" type="checkbox" name="collections[]"
-                                                    value="{{ $collection->id }}" id="{{ $collection->id }}"
-                                                    {{ $loop->first ? 'required' : '' }}>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @empty
-                                <div class="card border-0 bg-light rounded-4">
-                                    <div class="card-body text-center">
-                                        <h6>Find your collection in here</h6>
-                                    </div>
-                                </div>
-                            @endforelse
-                        </div>
 
-                        <div class="d-grid gap-2">
-                            <button type="button" class="btn btn-outline-primary rounded-3" data-bs-toggle="modal"
-                                data-bs-target="#create-collection">
-                                Create new collection
-                            </button>
-                            <button type="submit" class="btn btn-primary rounded-3">
-                                Save changes
-                            </button>
-                        </div>
+
+                        <button type="submit" class="btn btn-primary rounded-3">
+                            Confirm
+                        </button>
                     </form>
                 </div>
             </div>

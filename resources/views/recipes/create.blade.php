@@ -78,9 +78,9 @@
 
                                 <div class="mb-5">
                                     <h5>Instructions</h5>
-                                    <textarea placeholder="Add one or multiple steps" id="instructions" name="instructions" class="form-control">{{ old('steps') }}</textarea>
+                                    <textarea placeholder="Add one or multiple steps" id="instructions" name="instructions" class="form-control">{{ old('instructions') }}</textarea>
 
-                                    @error('steps')
+                                    @error('instructions')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>

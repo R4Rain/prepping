@@ -12,7 +12,12 @@ use Illuminate\Support\Facades\Storage;
 
 class RecipeController extends Controller
 {
-    
+    public function __construct()
+    {
+        $this->middleware(['auth'])->except('index');
+        $this->middleware(['user'])->except('index');;
+    }
+
     public function index()
     {   
         return view('recipes.index', [
