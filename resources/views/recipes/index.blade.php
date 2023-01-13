@@ -8,20 +8,19 @@
             </form>
         </div>
 
-        @foreach ($categories as $category)
-            <div class="mb-5">
-                <h4 class="mb-3">{{ $category->name }} Recipe</h4>
-                <div class="row row-cols-4 g-3">
-                    @foreach ($category->categories as $category)
-                        <div class="col">
-                            <a type="button" href="{{ route('sub-categories.index', $category) }}"
-                                class="btn btn-light rounded-3 w-100 text-start">
-                                {{ $category->name }}
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
+        <div class="mb-5">
+            <h4>Browse top categories</h4>
+            <div class="row row-cols-5 g-3">
+                @foreach ($categories as $category)
+                    <div class="col">
+                        <a href="{{ route('categories.show', $category) }}">
+                            <div class="card-body">
+                                <h5>{{ $category->name }}</h5>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
             </div>
-        @endforeach
+        </div>
     </div>
 </x-app>

@@ -55,7 +55,8 @@
                                         </div>
                                         <div class="col">
 
-                                            <button type="button" class="btn btn-outline-primary rounded-3 w-100">
+                                            <button type="button" class="btn btn-outline-primary rounded-3 w-100"
+                                                data-bs-toggle="modal" data-bs-target="#rate">
                                                 <i class="bi bi-star me-1"></i> Rate
                                             </button>
                                         </div>
@@ -177,11 +178,9 @@
                 <div class="modal-body p-5">
                     <div class="mb-4">
                         <h4 class="text-center">Give Rating</h4>
-                        <small class="text-muted">You can save recipe to a new collection or existing
-                            collection.</small>
                     </div>
 
-                    <form method="POST" action="{{ route('collection-details.store') }}">
+                    <form method="POST" action="{{ route('ratings.store') }}">
                         @csrf
 
                         <input type="hidden" value="{{ $recipe->id }}" name="recipe_id">

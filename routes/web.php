@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\CollectionDetailController;
 use App\Http\Controllers\CommentController;
@@ -29,6 +30,8 @@ Route::resource('replies', ReplyController::class);
 Route::resource('collections', CollectionController::class);
 Route::resource('collection-details', CollectionDetailController::class);
 Route::resource('ratings', RatingController::class);
+Route::resource('categories', CategoryController::class);
+
 
 
 
