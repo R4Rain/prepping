@@ -72,9 +72,11 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        return Collection::create([
+        Collection::create([
             'user_id' => $user->id,
             'name' => 'My Favorite'
         ]);
+
+        return $user;
     }
 }
