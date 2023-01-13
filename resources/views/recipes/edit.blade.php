@@ -100,14 +100,14 @@
                                         <div class="col">
                                             <div class="input-group">
                                                 <span class="input-group-text">Hours</span>
-                                                <input type="number" class="form-control" name="prep_hours"
+                                                <input type="number" class="form-control" name="prep_hours" value="{{ $recipe->prep_hours }}"
                                                     placeholder="0">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="input-group">
                                                 <span class="input-group-text">Minutes</span>
-                                                <input type="number" class="form-control" name="prep_minutes"
+                                                <input type="number" class="form-control" name="prep_minutes" value="{{ $recipe->prep_minutes }}"
                                                     placeholder="0">
                                             </div>
                                         </div>
@@ -121,14 +121,14 @@
                                         <div class="col">
                                             <div class="input-group">
                                                 <span class="input-group-text">Hours</span>
-                                                <input type="number" class="form-control" name="cook_hours"
+                                                <input type="number" class="form-control" name="cook_hours" value="{{ $recipe->cook_hours }}"
                                                     placeholder="0">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="input-group">
                                                 <span class="input-group-text">Minutes</span>
-                                                <input type="number" class="form-control" name="cook_minutes"
+                                                <input type="number" class="form-control" name="cook_minutes" value="{{ $recipe->cook_minutes }}"
                                                     placeholder="0">
                                             </div>
                                         </div>
