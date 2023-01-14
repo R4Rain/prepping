@@ -6,12 +6,14 @@ use App\Http\Controllers\CollectionDetailController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\CommunityController;
+use App\Http\Controllers\CommunityDetailController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\ReplyController;
-use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +43,11 @@ Route::resource('learn', CourseController::class)->parameters([
 Route::resource('learn.lessons', LessonController::class)->parameters([
     'learn' => 'course'
 ]);
+Route::resource('communities', CommunityController::class);
+Route::resource('community-details', CommunityDetailController::class);
+Route::resource('feeds', FeedController::class);
+
+
 
 
 

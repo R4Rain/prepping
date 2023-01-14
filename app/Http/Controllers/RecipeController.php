@@ -30,7 +30,7 @@ class RecipeController extends Controller
     public function manage()
     {   
         return view('recipes.manage', [
-            'recipes' => auth()->user()->recipes
+            'recipes' => Recipe::where('user_id', auth()->user()->id)->get()
         ]);
     }
 
@@ -75,7 +75,7 @@ class RecipeController extends Controller
             CategoryDetail::insert($data);
         });
         
-        return redirect()->route('home');
+        return redirect()->route('recipes.index');
     }
 
     public function show(Recipe $recipe)
@@ -149,7 +149,12 @@ class RecipeController extends Controller
 
     public function destroy(Recipe $recipe)
     {
-        //
+        if ($recipe->photo != NULL)
+            Storage::delete('public/recipes/' . $recipe->photo);
+
+        $recipe->delete();
+
+        return redirect()->back();
     }
 
     public function validateRequest(Request $request)

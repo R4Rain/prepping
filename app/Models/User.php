@@ -43,8 +43,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function recipes()
+    {
+        return $this->hasMany(Recipe::class);
+    }
+
     public function collections()
     {
         return $this->hasMany(Collection::class);
+    }
+
+    public function communities()
+    {
+        return $this->hasMany(Collection::class);
+    }
+
+    public function isMember($communityID)
+    {
+        return CommunityDetail::where([['user_id', auth()->user()->id], ['community_id', $communityID]])->first();
     }
 }

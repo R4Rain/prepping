@@ -1,9 +1,12 @@
-<div class="modal fade" id="register" tabindex="-1">
+<div class="modal fade" id="register"
+    {{ Request::is('register') ? 'data-bs-backdrop=static data-bs-keyboard=false' : '' }} tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content border-0 rounded-4">
             <div class="modal-body p-5">
                 <div class="text-center mb-4">
-                    <img src="/storage/assets/logo.png" alt="Prepping" width="40" class="mb-3">
+                    <a href="{{ route('home') }}">
+                        <img src="/storage/assets/logo.png" alt="Prepping" width="40" class="mb-3">
+                    </a>
                     <h4>Sign Up</h4>
                     <small class="text-muted">Already have an account? <a role="button" data-bs-target="#login"
                             data-bs-toggle="modal" class="text-decoration-none">Login</a></small>

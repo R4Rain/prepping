@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     $('#photo').change(function() {
         const file = this.files[0];
         console.log(file);
@@ -8,6 +9,11 @@ $(document).ready(function () {
                 console.log(event.target.result);
                 $('#card-img').prop('hidden', true);
                 $('#img-preview').attr('src', event.target.result).prop('hidden', false);
+
+                // const cropper = new Cropper(file, {
+                //     aspectRatio: 1,
+                //     viewMode: 0
+                // });
             }
             reader.readAsDataURL(file);
         }
@@ -29,15 +35,13 @@ $(document).ready(function () {
             console.error( error );
         });
 
-    $('#comment').on('keyup', function () {
-        if ($(this).val() != '') {
-            $('#btnComment').prop('disabled', false)
-        } else {
-            $('#btnComment').prop('disabled', true)
+    $('input[name="subscription"]').on('change', function () {
+        if ($(this).is(':checked')) {
+            $('#btnSubscribe').prop('disabled', false)
         }
     })
-    // const alert = new bootstrap.Modal('#alert')
-    // alert.show();
+    // const login = new bootstrap.Modal('#login')
+    // login.show();
 
     // setTimeout(function() {
     //     alert.hide()

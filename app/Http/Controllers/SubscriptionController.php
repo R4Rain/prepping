@@ -22,9 +22,21 @@ class SubscriptionController extends Controller
 
     public function store(Request $request)
     {   
+        $request->validate([
+            'subscription' => 'required|string',
+        ]);
+
+        if ($request->subscription == 'gold') {
+            $expiry = Carbon::now()->addYear();
+        } elseif ($request->subscription == 'plus') {
+            $expiry = Carbon::now()->addMonth();
+        } else {
+            $expiry = Carbon::now()->addDay();
+        }
+
         Subscription::create([
             'user_id' => auth()->user()->id,
-            'expiry' => Carbon::now()->addMonth()
+            'expiry' => $expiry
         ]);
 
         return redirect()->back();

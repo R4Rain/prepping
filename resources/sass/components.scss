@@ -33,11 +33,11 @@ body {
     --bs-btn-active-color: var(--bs-primary);
 }
 
-.btn-reply {
+.btn-primary-light {
     --bs-btn-color: var(--bs-dark);
     --bs-btn-bg: none;
     --bs-btn-border-color: none;
-    --bs-btn-hover-bg: #{tint-color(#3D1D00, 75%)};
+    --bs-btn-hover-bg: #{tint-color($primary, 75%)};
     --bs-btn-active-bg: var(--bs-btn-hover-bg);
 }
 
@@ -66,4 +66,9 @@ body {
 
 #recipe {
     padding: 6rem 0;
+}
+
+#sidebar .list-group-item {
+    border: none;
+    border-radius: .5rem;
 }

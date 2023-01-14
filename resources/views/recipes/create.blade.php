@@ -9,11 +9,16 @@
 
                             <div class="d-flex justify-content-between align-items-center bg-white py-4 mb-5 sticky-top">
                                 <h4 class="m-0">
-                                    <a href="{{ route('home') }}" class="text-dark">
+                                    <a href="{{ route('recipes.index') }}" class="text-dark">
                                         <i class="bi bi-arrow-left me-2"></i></a>
                                     Add Recipe
                                 </h4>
-                                <button type="submit" class="btn btn-primary rounded-3 px-4">Save</button>
+                                <div>
+                                    <button type="submit" class="btn btn-outline-light rounded-3 px-4 me-2">
+                                        Save & Share
+                                    </button>
+                                    <button type="submit" class="btn btn-primary rounded-3 px-4">Save</button>
+                                </div>
                             </div>
 
                             <div class="container-lg px-lg-5">
@@ -45,7 +50,8 @@
                                     <fieldset class="bd-custom">
                                         @foreach ($categories as $category)
                                             <input class="btn-check" type="checkbox" name="categories[]"
-                                                value="{{ $category->id }}" id="{{ $category->id }}">
+                                                value="{{ $category->id }}" id="{{ $category->id }}"
+                                                {{ $loop->first ? 'required' : '' }}>
                                             <label for="{{ $category->id }}"
                                                 class="btn btn-outline-check rounded-pill">{{ $category->name }}</label>
                                         @endforeach
@@ -59,7 +65,7 @@
                                 <div class="mb-5">
                                     <h5>Description</h5>
                                     <textarea placeholder="Introduce your recipe, add notes, cooking tips, serving suggestions, etc..." name="description"
-                                        class="form-control" rows="3">{{ old('description') }}</textarea>
+                                        class="form-control" rows="3" required>{{ old('description') }}</textarea>
 
                                     @error('description')
                                         <small class="text-danger">{{ $message }}</small>
@@ -68,7 +74,7 @@
 
                                 <div class="mb-5">
                                     <h5>Ingredients</h5>
-                                    <textarea placeholder="Add one or multiple items" id="ingredients" name="ingredients" class="form-control">{{ old('ingredients') }}</textarea>
+                                    <textarea placeholder="Add one or multiple items" id="ingredients" name="ingredients" class="form-control" required>{{ old('ingredients') }}</textarea>
 
                                     @error('ingredients')
                                         <small class="text-danger">{{ $message }}</small>
@@ -77,7 +83,7 @@
 
                                 <div class="mb-5">
                                     <h5>Instructions</h5>
-                                    <textarea placeholder="Add one or multiple steps" id="instructions" name="instructions" class="form-control">{{ old('instructions') }}</textarea>
+                                    <textarea placeholder="Add one or multiple steps" id="instructions" name="instructions" class="form-control" required>{{ old('instructions') }}</textarea>
 
                                     @error('instructions')
                                         <small class="text-danger">{{ $message }}</small>
@@ -86,7 +92,7 @@
 
                                 <div class="mb-5">
                                     <h5>Servings</h5>
-                                    <div class="text-muted mb-1">How many portions does this recipe make?</div>
+                                    <div class="text-muted mb-2">How many portions does this recipe make?</div>
                                     <input type="number" class="form-control" name="servings" placeholder="0"
                                         value="{{ old('servings') }}" required>
 
@@ -97,7 +103,7 @@
 
                                 <div class="mb-5">
                                     <h5>Prep time</h5>
-                                    <div class="text-muted mb-1">How long does it take to prepare this recipe?</div>
+                                    <div class="text-muted mb-2">How long does it take to prepare this recipe?</div>
                                     <div class="row">
                                         <div class="col">
                                             <div class="input-group">
@@ -118,7 +124,7 @@
 
                                 <div class="mb-5">
                                     <h5>Cook time</h5>
-                                    <div class="text-muted mb-1">How long does it take to cook this recipe?</div>
+                                    <div class="text-muted mb-2">How long does it take to cook this recipe?</div>
                                     <div class="row">
                                         <div class="col">
                                             <div class="input-group">
