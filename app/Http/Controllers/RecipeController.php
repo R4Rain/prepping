@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\CategoryDetail;
 use App\Models\Group;
+use App\Models\Rating;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,7 @@ class RecipeController extends Controller
     public function __construct()
     {
         $this->middleware(['auth'])->except('index');
-        $this->middleware(['user'])->except('index');;
+        $this->middleware(['user'])->except('index');
     }
 
     public function index()
@@ -79,9 +80,15 @@ class RecipeController extends Controller
 
     public function show(Recipe $recipe)
     {   
+        $user_rating = null;
+        if(auth()->check()){
+            $user_id = auth()->user()->id;
+            $user_rating = $recipe->ratings()->where('user_id', $user_id)->first();
+        }
         return view('recipes.show', [
             'recipe' => $recipe,
-            'average_rate' => $recipe->ratings()->avg('value')
+            'average_rate' => $recipe->ratings()->avg('value'),
+            'user_rating' => $user_rating,
         ]);
     }
 

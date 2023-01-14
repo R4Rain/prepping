@@ -35,7 +35,13 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validateRequest($request);
+        Rating::create([
+            'user_id' => auth()->user()->id,
+            'recipe_id' => $request->recipe_id,
+            'value' => $request->value,
+        ]);
+        return redirect()->back();
     }
 
     /**
@@ -69,17 +75,23 @@ class RatingController extends Controller
      */
     public function update(Request $request, Rating $rating)
     {
-        //
+        $this->validateRequest($request);
+        $rating->update([
+            'value' => $request->value,
+        ]);
+        return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Rating  $rating
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Rating $rating)
     {
-        //
+        $rating->delete();
+        return redirect()->back();
+    }
+
+    public function validateRequest(Request $request){
+        $request->validate([
+            'recipe_id' => 'required',
+            'value' => 'integer|min:1|max:5'
+        ]);
     }
 }

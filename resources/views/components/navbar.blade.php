@@ -15,7 +15,7 @@
                     <a class="nav-link" href="{{ route('recipes.index') }}">Recipes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Learn to Cook</a>
+                    <a class="nav-link" href="{{ route('learn.index') }}">Learn to Cook</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Community</a>
@@ -27,6 +27,11 @@
                     <a href="{{ route('recipes.create') }}" class="btn btn-primary">
                         Create a recipe
                     </a>
+                    @if(auth()->user()->role == 'ADMIN')
+                        <a href="{{ route('learn.create') }}" class="btn btn-success">
+                            Create a course
+                        </a>
+                    @endif
                     <div class="dropdown">
                         <a class="btn btn-light" type="button" data-bs-toggle="dropdown">
                             <i class="bi bi-person-fill me-1"></i> {{ auth()->user()->name }}

@@ -54,10 +54,9 @@
                                             </button>
                                         </div>
                                         <div class="col">
-
                                             <button type="button" class="btn btn-outline-primary rounded-3 w-100"
                                                 data-bs-toggle="modal" data-bs-target="#rate">
-                                                <i class="bi bi-star me-1"></i> Rate
+                                                <i class="bi bi-star me-1"></i> @if ($user_rating) Edit Rating @else Rate @endif
                                             </button>
                                         </div>
                                     @else
@@ -171,30 +170,61 @@
             </div>
         </div>
     </div>
-
+    
     <div class="modal fade" id="rate" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0">
                 <div class="modal-body p-5">
-                    <div class="mb-4">
-                        <h4 class="text-center">Give Rating</h4>
-                    </div>
-                    <form method="POST" action="{{ route('ratings.store') }}">
-                        @csrf
-
-                        <input type="hidden" value="{{ $recipe->id }}" name="recipe_id">
-                        <div>
-                            <button id="rate-1" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="1"><i class="bi bi-star-fill"></i></button>
-                            <button id="rate-2" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="2"><i class="bi bi-star-fill"></i></button>
-                            <button id="rate-3" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="3"><i class="bi bi-star-fill"></i></button>
-                            <button id="rate-4" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="4"><i class="bi bi-star-fill"></i></button>
-                            <button id="rate-5" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="5"><i class="bi bi-star-fill"></i></button>
-                            <input type="text" value="0" id="input-rating" name="value" hidden>
+                    @if ($user_rating == null)
+                        <div class="mb-4">
+                            <h4 class="text-center">Give Rating</h4>
                         </div>
-                        <button type="submit" class="btn btn-primary rounded-3">
-                            Confirm
-                        </button>
-                    </form>
+                        <form method="POST" action="{{ route('ratings.store') }}">
+                            @csrf
+                            <input type="hidden" value="{{ $recipe->id }}" name="recipe_id">
+                            <div class="mb-3">
+                                <button id="rate-1" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="1"><i class="bi bi-star-fill"></i></button>
+                                <button id="rate-2" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="2"><i class="bi bi-star-fill"></i></button>
+                                <button id="rate-3" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="3"><i class="bi bi-star-fill"></i></button>
+                                <button id="rate-4" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="4"><i class="bi bi-star-fill"></i></button>
+                                <button id="rate-5" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="5"><i class="bi bi-star-fill"></i></button>
+                                <span id="rating-value" class="text-muted ms-1">0</span>
+                                <input type="text" value="0" id="input-rating" name="value" hidden>
+                            </div>
+                            <button type="submit" class="btn btn-primary rounded-3">
+                                Confirm
+                            </button>
+                        </form>
+                    @else
+                        <div class="mb-4">
+                            <h4 class="text-center">Update Rating</h4>
+                        </div>
+                        <form method="POST" action="{{ route('ratings.update', $user_rating) }}">
+                            @csrf
+                            <input type="hidden" value="{{ $recipe->id }}" name="recipe_id">
+                            <div>Current rating: {{ $user_rating->value }}</div>
+                            <div class="mb-3">
+                                <button id="rate-1" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="1"><i class="bi bi-star-fill"></i></button>
+                                <button id="rate-2" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="2"><i class="bi bi-star-fill"></i></button>
+                                <button id="rate-3" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="3"><i class="bi bi-star-fill"></i></button>
+                                <button id="rate-4" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="4"><i class="bi bi-star-fill"></i></button>
+                                <button id="rate-5" type="button" class="px-0 py-0 border-0 bg-transparent text-secondary" value="5"><i class="bi bi-star-fill"></i></button>
+                                <span id="rating-value" class="text-muted ms-1">0</span>
+                                <input type="text" value="0" id="input-rating" name="value" hidden>
+                            </div>
+                            @method('put')
+                            <button type="submit" class="btn btn-primary rounded-3">
+                                Confirm
+                            </button>
+                            <a class="btn btn-outline-primary rounded-3" onclick="event.preventDefault();document.getElementById('delete-rating').submit();">
+                                <i class="bi bi-trash3 me-1"></i> Delete
+                            </a>
+                        </form>
+                        <form id='delete-rating' method="POST" action="{{ route('ratings.destroy', $user_rating) }}">
+                            @csrf
+                            @method('delete')
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>
@@ -216,6 +246,7 @@
             var index = e.currentTarget.value;
             changeStar(index);
             document.getElementById('input-rating').value = index;
+            document.getElementById('rating-value').innerHTML = index;
         }
 
         document.addEventListener('DOMContentLoaded', function () {
