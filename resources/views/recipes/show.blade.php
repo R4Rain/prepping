@@ -25,15 +25,19 @@
                                     <div class="card-body d-flex justify-content-center align-items-center gap-5">
                                         <div>
                                             <i class="bi bi-star-fill text-primary me-1"></i>
-                                            4.0
+                                            @if ($recipe->ratings->count() > 0)
+                                                {{ (float) $recipe->ratings->sum('value') / (float) $recipe->ratings->count() }}
+                                            @else
+                                                0
+                                            @endif
                                         </div>
                                         <div>
                                             <i class="bi bi-clock text-primary me-1"></i>
                                             <span class="me-2">
-                                                <span class="text-muted">Prep: </span>{{ $recipe->prep_time }}min
+                                                <span class="text-muted">Prep: </span>{{ $recipe->prep_time }}mins
                                             </span>
                                             <span>
-                                                <span class="text-muted">Cook: </span>{{ $recipe->cook_time }}min
+                                                <span class="text-muted">Cook: </span>{{ $recipe->cook_time }}mins
                                             </span>
                                         </div>
                                         <div>
@@ -68,11 +72,14 @@
                                             </a>
                                         </div>
                                         <div class="col">
-
-                                            <button type="button" class="btn btn-outline-primary rounded-3 w-100">
+                                            <button type="button" data-bs-toggle="modal"
+                                                data-bs-target="#delete{{ $recipe->id }}"
+                                                class="btn btn-outline-primary rounded-3 w-100">
                                                 <i class="bi bi-trash3 me-1"></i> Delete
                                             </button>
                                         </div>
+
+                                        <x-delete :model='$recipe' name='recipes'></x-delete>
                                     @endif
                                 </div>
                             </div>
@@ -103,8 +110,8 @@
                             <div class="row g-3 mb-4">
                                 <div class="col">
                                     <div class="form-floating">
-                                        <textarea class="form-control rounded-3" placeholder="What's your thought?" id="comment" name="comment"></textarea>
-                                        <label for="comment">What's your thought?</label>
+                                        <textarea class="form-control rounded-3" id="comment" name="comment" required>{{ old('comment') }}</textarea>
+                                        <label for="comment">Add a comment...</label>
                                     </div>
 
                                     @error('comment')
@@ -118,7 +125,7 @@
                         </form>
 
                         @forelse ($recipe->comments as $comment)
-                            <div class="card border-0 bg-light rounded-4">
+                            <div class="card border-0 bg-light rounded-4 mb-3">
                                 <div class="card-body">
                                     <small class="fw-bold">{{ $comment->user->name }}</small>
                                     <div class="mb-2">{{ $comment->content }}</div>
@@ -126,39 +133,78 @@
                                     <small class="text-muted" style="font-size: 13px">
                                         {{ $comment->getCreatedTime($comment->created_at) }}
                                     </small>
-                                    <button class="btn btn-reply btn-sm rounded-pill ms-2" style="font-size: 13px">
+                                    <button type="button" id="btnCreateReply{{ $comment->id }}"
+                                        class="btn btn-primary-light btn-sm rounded-pill mx-2" style="font-size: 13px">
                                         Reply
                                     </button>
+                                    @if ($comment->replies->count() > 0)
+                                        <button type="button" id="btnShowReply{{ $comment->id }}"
+                                            class="btn btn-primary-light btn-sm rounded-pill" style="font-size: 13px">
+                                            {{ $comment->replies->count() }}
+                                            {{ $comment->replies->count() > 1 ? 'replies' : 'reply' }}
+                                        </button>
+                                    @endif
                                 </div>
                             </div>
 
-                            <div class="row mt-2" hidden>
+                            <div id="showReply{{ $comment->id }}" class="row mb-3" style="display: none">
+                                @foreach ($comment->replies as $reply)
+                                    <div class="col offset-1">
+                                        <div class="card border-0 bg-light rounded-4 mb-3">
+                                            <div class="card-body">
+                                                <small class="fw-bold">{{ $reply->user->name }}</small>
+                                                <div class="mb-2">{{ $reply->content }}</div>
+
+                                                <small class="text-muted" style="font-size: 13px">
+                                                    {{ $reply->getCreatedTime($reply->created_at) }}
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <div id="createReply{{ $comment->id }}" class="row mb-3" style="display: none">
                                 <form method="POST" action="{{ route('replies.store') }}" class="col offset-1">
                                     @csrf
 
                                     <input type="hidden" name="comment_id" value="{{ $comment->id }}">
 
-                                    <div class="mb-2">
-                                        <div class="form-floating">
-                                            <textarea class="form-control border-0 bg-light" id="reply" name="reply">{{ old('comment') }}</textarea>
-                                            <label for="reply">Write a reply</label>
+                                    <div class="row g-3">
+                                        <div class="col">
+                                            <div class="form-floating">
+                                                <textarea class="form-control rounded-3" id="reply{{ $comment->id }}" name="reply" required>{{ old('reply') }}</textarea>
+                                                <label for="reply{{ $comment->id }}">Add a reply...</label>
+                                            </div>
+
+                                            @error('reply')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
-
-                                        @error('reply')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-
-                                    <div class="text-end">
-                                        <button type="submit" id="btnComment" class="btn btn-primary rounded-3"
-                                            disabled>Reply</button>
+                                        <div class="col-2">
+                                            <button class="btn btn-secondary rounded-3 w-100" type="submit">
+                                                Reply
+                                            </button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
+
+                            <script>
+                                $(document).ready(function() {
+                                    $('#btnCreateReply{{ $comment->id }}').on('click', function() {
+                                        $('#createReply{{ $comment->id }}').toggle()
+                                    })
+
+                                    $('#btnShowReply{{ $comment->id }}').on('click', function() {
+                                        $('#showReply{{ $comment->id }}').toggle()
+                                    })
+                                })
+                            </script>
                         @empty
                             <div class="card border-0 bg-light rounded-4 mb-4">
                                 <div class="card-body p-5">
-                                    <h5 class="text-center">0 comments</h5>
+                                    <h5 class="text-center text-muted">0 comments</h5>
                                 </div>
                             </div>
                         @endforelse

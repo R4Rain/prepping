@@ -86,7 +86,7 @@
 
                                 <div class="mb-5">
                                     <h5>Servings</h5>
-                                    <div class="text-muted mb-1">How many portions does this recipe make?</div>
+                                    <div class="text-muted mb-2">How many portions does this recipe make?</div>
                                     <input type="number" class="form-control" name="servings" placeholder="0"
                                         value="{{ $recipe->servings }}" required>
 
@@ -97,7 +97,7 @@
 
                                 <div class="mb-5">
                                     <h5>Prep time</h5>
-                                    <div class="text-muted mb-1">How long does it take to prepare this recipe?</div>
+                                    <div class="text-muted mb-2">How long does it take to prepare this recipe?</div>
                                     <div class="row">
                                         <div class="col">
                                             <div class="input-group">
@@ -118,7 +118,7 @@
 
                                 <div class="mb-5">
                                     <h5>Cook time</h5>
-                                    <div class="text-muted mb-1">How long does it take to cook this recipe?</div>
+                                    <div class="text-muted mb-2">How long does it take to cook this recipe?</div>
                                     <div class="row">
                                         <div class="col">
                                             <div class="input-group">

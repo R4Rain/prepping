@@ -1,11 +1,11 @@
 <div class="modal fade" id="collection" tabindex="-1">
     <div class="modal-dialog">
-        <div class="modal-content border-0">
+        <div class="modal-content border-0 rounded-4">
             <div class="modal-body p-5">
-                <div class="mb-4">
-                    <h4 class="text-center">Add to collection</h4>
+                <div class="mb-4 text-center">
+                    <h4 class="mb-2">Add to collection</h4>
                     <small class="text-muted">You can save recipe to a new collection or existing
-                        collection.</small>
+                        collection</small>
                 </div>
 
                 <form method="POST" action="{{ route('collection-details.store') }}">

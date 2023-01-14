@@ -63,7 +63,7 @@
                             @else
                                 <div class="card rounded-4 bg-light border-0">
                                     <div class="card-body text-center p-5 text-muted">
-                                        <h5>No recipe found</h5>
+                                        <h5>No recipes found</h5>
                                     </div>
                                 </div>
                             @endif

@@ -1,7 +1,8 @@
 <x-app title="Login">
-    <x-login></x-login>
-
     <script>
-        $('#login').modal('show');
+        $(document).ready(function() {
+            const login = new bootstrap.Modal('#login')
+            login.show();
+        })
     </script>
 </x-app>

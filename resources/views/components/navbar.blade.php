@@ -12,13 +12,13 @@
                     <a class="nav-link" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('recipes.index') }}">Recipes</a>
+                    <a class="nav-link" href="{{ route('recipes.index') }}">Explore</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Learn to Cook</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Community</a>
+                    <a class="nav-link" href="{{ route('communities.index') }}">Community</a>
                 </li>
             </ul>
 
@@ -35,28 +35,27 @@
                         <ul class="dropdown-menu dropdown-menu-end border-0 p-1 shadow-sm">
                             <li>
                                 <a href="{{ route('recipes.manage') }}" type="button"
-                                    class="dropdown-item p-2 rounded-3 text-muted">
-                                    <i class="bi bi-book me-1"></i> {{ __('My Recipes') }}
+                                    class="dropdown-item p-2 rounded-3">
+                                    {{ __('Recipes') }}
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('collections.index') }}" type="button"
-                                    class="dropdown-item p-2 rounded-3 text-muted">
-                                    <i class="bi bi-heart me-1"></i> {{ __('My Collections') }}
+                                    class="dropdown-item p-2 rounded-3">
+                                    {{ __('Collections') }}
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('subscriptions.index') }}" type="button"
-                                    class="dropdown-item p-2 rounded-3 text-muted">
-                                    <i class="bi bi-credit-card me-1"></i> {{ __('My Subscription') }}
+                                    class="dropdown-item p-2 rounded-3">
+                                    {{ __('Subscription') }}
                                 </a>
                             </li>
                             <li>
                                 <hr class="m-1">
                             </li>
                             <li>
-                                <a href="{{ route('logout') }}" type="button"
-                                    class="dropdown-item p-2 rounded-3 text-muted"
+                                <a href="{{ route('logout') }}" type="button" class="dropdown-item p-2 rounded-3"
                                     onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>

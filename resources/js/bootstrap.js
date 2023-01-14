@@ -11,6 +11,7 @@ try {
     window.$ = window.jQuery = require('jquery');
     window.bootstrap = require('bootstrap/dist/js/bootstrap.bundle.js');
     window.ClassicEditor = require('@ckeditor/ckeditor5-build-classic');
+    window.Cropper = require('cropperjs/dist/cropper');
     
 } catch (e) { }
 
