@@ -25,7 +25,6 @@
                                     <div class="card-body d-flex justify-content-center align-items-center gap-5">
                                         <div>
                                             <i class="bi bi-star-fill text-primary me-1"></i>
-                                            {{ $average_rate ? round($average_rate, 1) : "No ratings"}}
                                             @if ($recipe->ratings->count() > 0)
                                                 {{ (float) $recipe->ratings->sum('value') / (float) $recipe->ratings->count() }}
                                             @else
