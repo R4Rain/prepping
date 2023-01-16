@@ -7,7 +7,7 @@
                         <div class="row g-5 mb-4">
                             <div class="col">
                                 <h2>
-                                    <a href="{{ url()->previous() }}" class="text-dark">
+                                    <a href="{{ route('learn.show', $course) }}" class="text-dark">
                                     <i class="bi bi-arrow-left me-2"></i></a>{{ $lesson->title }}
                                 </h2>
                                 <small>
@@ -43,6 +43,29 @@
                         <h4 class="mb-4">Content</h4>
                         <div class="mb-5">
                             {!! $lesson->content !!}
+                        </div>
+                        <hr class="my-4" style="border-style: dashed">
+                        <div class="d-flex flex-row justify-content-between">
+                            <div class="col-2 d-flex justify-content-start">
+                                @if($prev_exists)
+                                    <form method="POST" class="w-100" action="{{ route('learn.lessons.previous', [$course, $lesson]) }}">
+                                        @csrf
+                                        <button class="btn btn-primary rounded-3 w-100" type="submit">
+                                            <i class="bi bi-caret-left-fill text-white me-1"></i> Previous
+                                        </button>
+                                    </form>
+                                @endif
+                            </div>
+                            <div class="col-2 d-flex justify-content-end">
+                                @if($next_exists)
+                                    <form method="POST" class="w-100" action="{{ route('learn.lessons.next', [$course, $lesson]) }}">
+                                        @csrf
+                                        <button class="btn btn-primary rounded-3 w-100" type="submit">
+                                            Next <i class="bi bi-caret-right-fill text-white ms-1"></i>
+                                        </button>
+                                    </form>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -13,12 +13,24 @@
                                 <div class="my-4 text-muted">
                                     {!! $course->description !!}
                                 </div>
-
+                                @if(auth()->user()->role != 'ADMIN')
+                                    <div class="d-flex flex-column mb-4">
+                                        <small class="fw-bold">Your current progress</small>
+                                        <div class="progress" role="progressbar" aria-label="Course progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar" style="width: {{ round($total_completed/$course->lessons->count() * 100) }}%;" ></div>
+                                        </div>
+                                        <small class="mt-1">{{ round($total_completed/$course->lessons->count() * 100) }}% complete</small>
+                                    </div>
+                                @endif
                                 <div class="card border-0 bg-light rounded-3">
                                     <div class="card-body d-flex justify-content-center align-items-center gap-5">
                                         <div>
                                             <i class="bi bi-file-text-fill text-primary me-1"></i>
                                             <span class="text-muted">{{$course->lessons->count()}} lessons</span>
+                                        </div>
+                                        <div>
+                                            <i class="bi bi-hourglass-split text-primary me-1"></i>
+                                            <span class="text-muted">{{$course->estimated_finish}} hours (estimated)</span>
                                         </div>
                                     </div>
                                 </div>

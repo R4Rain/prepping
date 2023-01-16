@@ -40,6 +40,10 @@ Route::resource('categories', CategoryController::class);
 Route::resource('learn', CourseController::class)->parameters([
     'learn' => 'course'
 ]);
+Route::prefix('learn/{course:id}/lessons')->name('learn.lessons.')->group(function () {
+    Route::post('{lesson:id}/next', [LessonController::class, 'next'])->name('next');
+    Route::post('{lesson:id}/previous', [LessonController::class, 'previous'])->name('previous');
+});
 Route::resource('learn.lessons', LessonController::class)->parameters([
     'learn' => 'course'
 ]);

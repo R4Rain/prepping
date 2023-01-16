@@ -37,22 +37,38 @@ class LessonController extends Controller
 
     public function show(Course $course, Lesson $lesson)
     {
-        // if(auth()->check() && auth()->user()->role != 'ADMIN'){
-        //     $user_id = auth()->user()->id;
-        //     $existing_status = LessonStatus::where('user_id', $user_id)->where('course_id', $course->id)->where('lesson_id', $lesson->id);
-        //     if(!$existing_status->exists()){
-        //         LessonStatus::create([
-        //             'user_id' => $user_id,
-        //             'course_id' => $course->id,
-        //             'lesson_id' => $lesson->id,
-        //         ]);
-        //     }
-        // }
-        
+        if(auth()->user()->role != 'ADMIN'){
+            $user_id = auth()->user()->id;
+            $existing_status = LessonStatus::where('user_id', $user_id)->where('lesson_id', $lesson->id);
+            if(!$existing_status->exists()){
+                LessonStatus::create([
+                    'user_id' => $user_id,
+                    'lesson_id' => $lesson->id,
+                ]);
+            }
+        }
+        $next_exists = ($course->lessons()->where('id', '>', $lesson->id)->count() > 0);
+        $prev_exists = ($course->lessons()->where('id', '<', $lesson->id)->count() > 0);
         return view('lessons.show', [
             'course' => $course,
-            'lesson' => $lesson
+            'lesson' => $lesson,
+            'next_exists' => $next_exists,
+            'prev_exists' => $prev_exists,
         ]);
+    }
+
+    public function next(Course $course, Lesson $lesson)
+    {
+        $next = $course->lessons()->where('id', '>', $lesson->id)->orderBy('id', 'asc')->first();
+        $next = $next ? $next : $lesson;
+        return redirect()->route('learn.lessons.show', [$course, $next]);
+    }
+
+    public function previous(Course $course, Lesson $lesson)
+    {
+        $prev = $course->lessons()->where('id', '<', $lesson->id)->orderBy('id', 'desc')->first();
+        $prev = $prev ? $prev : $lesson;
+        return redirect()->route('learn.lessons.show', [$course, $prev]);
     }
 
     public function edit(Course $course, Lesson $lesson)

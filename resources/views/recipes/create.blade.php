@@ -50,14 +50,13 @@
                                     <fieldset class="bd-custom">
                                         @foreach ($categories as $category)
                                             <input class="btn-check" type="checkbox" name="categories[]"
-                                                value="{{ $category->id }}" id="{{ $category->id }}"
-                                                {{ $loop->first ? 'required' : '' }}>
+                                                value="{{ $category->id }}" id="{{ $category->id }}">
                                             <label for="{{ $category->id }}"
                                                 class="btn btn-outline-check rounded-pill">{{ $category->name }}</label>
                                         @endforeach
                                     </fieldset>
 
-                                    @error('category')
+                                    @error('categories')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
@@ -74,7 +73,7 @@
 
                                 <div class="mb-5">
                                     <h5>Ingredients</h5>
-                                    <textarea placeholder="Add one or multiple items" id="ingredients" name="ingredients" class="form-control" required>{{ old('ingredients') }}</textarea>
+                                    <textarea placeholder="Add one or multiple items" id="ingredients" name="ingredients" class="form-control">{{ old('ingredients') }}</textarea>
 
                                     @error('ingredients')
                                         <small class="text-danger">{{ $message }}</small>
@@ -83,7 +82,7 @@
 
                                 <div class="mb-5">
                                     <h5>Instructions</h5>
-                                    <textarea placeholder="Add one or multiple steps" id="instructions" name="instructions" class="form-control" required>{{ old('instructions') }}</textarea>
+                                    <textarea placeholder="Add one or multiple steps" id="instructions" name="instructions" class="form-control">{{ old('instructions') }}</textarea>
 
                                     @error('instructions')
                                         <small class="text-danger">{{ $message }}</small>

@@ -4,7 +4,7 @@
             <div class="col-md-8">
                 <div class="card border-0 shadow-sm rounded-4">
                     <div class="card-body p-5 pt-4">
-                        <form method="POST" action="{{ route('learn.lessons.store', $course) }}">
+                        <form method="POST" action="{{ route('learn.lessons.store', $course) }}" enctype="multipart/form-data">
                             @csrf
                             <div class="d-flex justify-content-between align-items-center bg-white py-4 mb-5 sticky-top">
                                 <h4 class="m-0">
@@ -42,6 +42,12 @@
                                 @error('content')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
+                            </div>
+
+                            <div class="mb-5">
+                                <h5>Materials<small class="text-danger ms-1"></small></h5>
+                                <div class="text-muted mb-2">Upload some file references for your lesson</div>
+                                <input type="file" id="materials" name="materials[]" class="form-control mt-3" required>
                             </div>
                         </form>
                     </div>

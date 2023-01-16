@@ -161,7 +161,7 @@ class RecipeController extends Controller
     {   
         $request->validate([
             'name' => 'required|string',
-            'categories.*' => 'required|integer',
+            'categories' => 'required|integer',
             'description' => 'required|string',
             'ingredients' => 'required|string',
             'instructions' => 'required|string',

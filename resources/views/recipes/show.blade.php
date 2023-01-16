@@ -148,7 +148,7 @@
 
                             <div id="showReply{{ $comment->id }}" class="row mb-3" style="display: none">
                                 @foreach ($comment->replies as $reply)
-                                    <div class="col offset-1">
+                                    <div class="col-11 offset-1">
                                         <div class="card border-0 bg-light rounded-4 mb-3">
                                             <div class="card-body">
                                                 <small class="fw-bold">{{ $reply->user->name }}</small>

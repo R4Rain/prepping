@@ -18,6 +18,7 @@ class CreateCoursesTable extends Migration
             $table->string('title');
             $table->string('photo');
             $table->longText('description');
+            $table->integer('estimated_finish');
             $table->timestamps();
         });
     }
