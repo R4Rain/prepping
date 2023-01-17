@@ -1,6 +1,7 @@
 <x-app title="My Collections">
-    <div class="container p-5">
+    <x-navbar></x-navbar>
 
+    <div class="container p-5">
         <div class="row">
             <div class="col-4">
                 <x-sidebar></x-sidebar>

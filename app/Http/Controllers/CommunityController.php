@@ -6,9 +6,15 @@ use App\Models\Community;
 use Illuminate\Http\Request;
 
 class CommunityController extends Controller
-{
-    public function index()
+{   
+    public function __construct()
     {
+        $this->middleware(['auth'])->except('index');
+        $this->middleware(['user'])->except('index');
+    }
+
+    public function index()
+    {   
         return view('communities.index', [
             'communities' => Community::all()
         ]);

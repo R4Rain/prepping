@@ -21,7 +21,6 @@
 <body>
     <div id="app">
         {{-- <x-alert></x-alert> --}}
-        <x-navbar></x-navbar>
 
         <main>
             {{ $slot }}

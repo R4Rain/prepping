@@ -25,7 +25,6 @@ class CreateRecipesTable extends Migration
             $table->integer('servings');
             $table->integer('prep_time');
             $table->integer('cook_time');
-            $table->boolean('premium')->default(false);
             $table->timestamps();
         });
     }

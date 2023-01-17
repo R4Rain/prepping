@@ -18,7 +18,7 @@ class FeedController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   
         Feed::create([
             'description' => $request->description,
             'recipe_id' => $request->recipe_id,

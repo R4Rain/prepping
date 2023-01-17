@@ -32,7 +32,7 @@ class LessonController extends Controller
             'course_id' => $course->id,
         ]);
 
-        return redirect()->route('learn.show', $course);
+        return redirect()->route('courses.show', $course);
     }
 
     public function show(Course $course, Lesson $lesson)
@@ -80,7 +80,7 @@ class LessonController extends Controller
             'content' => $request->content,
         ]);
 
-        return redirect()->route('learn.show', $course);
+        return redirect()->route('courses.show', $course);
     }
 
     /**
@@ -92,7 +92,7 @@ class LessonController extends Controller
     public function destroy(Course $course, Lesson $lesson)
     {
         $lesson->delete();
-        return redirect()->route('learn.show', $course);
+        return redirect()->route('courses.show', $course);
     }
 
     public function validateRequest(Request $request)

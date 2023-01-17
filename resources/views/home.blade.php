@@ -1,4 +1,6 @@
 <x-app title="Prepping">
+    <x-navbar></x-navbar>
+
     <section id="header">
         <div class="container-lg p-5">
             <div class="row g-5">
@@ -9,13 +11,8 @@
                         home-cooked meal on the table, all with the unbridled fun and spirit!
                     </p>
 
-                    @if (auth()->check())
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Discover your favorite recipe">
-                            <button class="btn btn-secondary" type="submit">Search</button>
-                        </form>
-                    @else
-                        <button type="button" class="btn btn-primary rounded-3" data-bs-toggle="modal"
+                    @if (!auth()->check())
+                        <button type="button" class="btn btn-secondary rounded-3" data-bs-toggle="modal"
                             data-bs-target="#register">Sign up for free</button>
                     @endif
                 </div>
@@ -27,40 +24,74 @@
     </section>
 
     <section id="subscription">
-        <div class="container-fluid">
-            <div class="text-center mb-4">
-
+        <div class="container-lg p-5">
+            <div class="row">
+                <div class="col-5">
+                    <div class="card border-0 rounded-4 mb-4">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4>Gold</h4>
+                                <div class="text-end">
+                                    <h5 class="text-primary">$6.99</h5>
+                                    <span class="text-muted">Yearly subscription</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-0 rounded-4 mb-4">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4>Plus</h4>
+                                <div class="text-end">
+                                    <h5 class="text-primary">$1.99</h5>
+                                    <span class="text-muted">Monthly subscription</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-0 rounded-4">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4>Basic</h4>
+                                <div class="text-end">
+                                    <h5 class="text-primary">$0.4</h5>
+                                    <span class="text-muted">One day pass</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col offset-1 my-auto">
+                    <h1 class="mb-4">Subscirbe to Prepping Premium</h1>
+                    <ul class="fs-5">
+                        <li>Unlimited recipe creation</li>
+                        <li>Full access to all courses</li>
+                        <li>Create your own community</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="recipe">
-        <div class="container-lg  p-5">
+        <div class="container-lg p-5">
             <div class="text-center mb-5">
                 <h2>More than 500 recipes have been shared on this platform</h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit</p>
+                <p>Find and share everyday cooking inspiration with ratings and reviews you can trust.</p>
             </div>
 
             <div class="card border-0 rounded-4 shadow-sm">
                 <div class="card-body p-5">
-                    <div class="mb-5">
-                        <h4>Popular Recipe Categories</h4>
+                    <div class="row row-cols-4 mb-4">
+                        @foreach ($recipes as $recipe)
+                            <div class="col">
+                                <x-recipe :recipe='$recipe'></x-recipe>
+                            </div>
+                        @endforeach
                     </div>
 
-                    <div class="mb-5">
-                        <h4>Discover Recipes</h4>
-                        <p class="text-muted">
-                            Find and share everyday cooking inspiration with ratings and reviews you can trust. Recipes
-                            for easy dinners, healthy eating, fast and cheap, kid-friendly, and more.
-                        </p>
-
-                        <div class="row row-cols-4">
-                            @foreach ($recipes as $recipe)
-                                <div class="col">
-                                    <x-recipe :recipe='$recipe'></x-recipe>
-                                </div>
-                            @endforeach
-                        </div>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary rounded-3 px-3">View all</button>
                     </div>
                 </div>
             </div>

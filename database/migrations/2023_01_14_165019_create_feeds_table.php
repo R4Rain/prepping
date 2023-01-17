@@ -19,7 +19,7 @@ class CreateFeedsTable extends Migration
             $table->foreign('community_detail_id')->references('id')->on('community_details')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('recipe_id');
             $table->foreign('recipe_id')->references('id')->on('recipes')->onUpdate('cascade')->onDelete('cascade');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

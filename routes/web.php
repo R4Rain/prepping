@@ -8,6 +8,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\CommunityDetailController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LessonController;
@@ -21,8 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', HomeController::class)->name('home');
 Route::get('search', [HomeController::class, 'search'])->name('search');
+Route::get('dashboard', DashboardController::class)->name('dashboard');
+
 
 
 Route::prefix('recipes')->name('recipes.')->group(function () {
@@ -37,10 +40,13 @@ Route::resource('collections', CollectionController::class);
 Route::resource('collection-details', CollectionDetailController::class);
 Route::resource('ratings', RatingController::class);
 Route::resource('categories', CategoryController::class);
-Route::resource('learn', CourseController::class)->parameters([
-    'learn' => 'course'
-]);
-Route::resource('learn.lessons', LessonController::class)->parameters([
+
+Route::prefix('courses')->name('courses.')->group(function () {
+    Route::get('manage', [CourseController::class, 'manage'])->name('manage');
+});
+Route::resource('courses', CourseController::class);
+
+Route::resource('courseslessons', LessonController::class)->parameters([
     'learn' => 'course'
 ]);
 Route::resource('communities', CommunityController::class);

@@ -1,4 +1,6 @@
 <x-app title="Create Recipe">
+    <x-navbar></x-navbar>
+
     <div class="container-fluid py-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -7,18 +9,13 @@
                         <form method="POST" action="{{ route('recipes.store') }}" enctype="multipart/form-data">
                             @csrf
 
-                            <div class="d-flex justify-content-between align-items-center bg-white py-4 mb-5 sticky-top">
+                            <div class="d-flex justify-content-between align-items-center bg-white py-4 mb-4 sticky-top">
                                 <h4 class="m-0">
                                     <a href="{{ route('recipes.index') }}" class="text-dark">
                                         <i class="bi bi-arrow-left me-2"></i></a>
                                     Add Recipe
                                 </h4>
-                                <div>
-                                    <button type="submit" class="btn btn-outline-light rounded-3 px-4 me-2">
-                                        Save & Share
-                                    </button>
-                                    <button type="submit" class="btn btn-primary rounded-3 px-4">Save</button>
-                                </div>
+                                <button type="submit" class="btn btn-secondary rounded-3 px-4">Save</button>
                             </div>
 
                             <div class="container-lg px-lg-5">
@@ -50,14 +47,13 @@
                                     <fieldset class="bd-custom">
                                         @foreach ($categories as $category)
                                             <input class="btn-check" type="checkbox" name="categories[]"
-                                                value="{{ $category->id }}" id="{{ $category->id }}"
-                                                {{ $loop->first ? 'required' : '' }}>
+                                                value="{{ $category->id }}" id="{{ $category->id }}">
                                             <label for="{{ $category->id }}"
                                                 class="btn btn-outline-check rounded-pill">{{ $category->name }}</label>
                                         @endforeach
                                     </fieldset>
 
-                                    @error('category')
+                                    @error('categories')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
@@ -74,7 +70,7 @@
 
                                 <div class="mb-5">
                                     <h5>Ingredients</h5>
-                                    <textarea placeholder="Add one or multiple items" id="ingredients" name="ingredients" class="form-control" required>{{ old('ingredients') }}</textarea>
+                                    <textarea placeholder="Add one or multiple items" id="ingredients" name="ingredients" class="form-control">{{ old('ingredients') }}</textarea>
 
                                     @error('ingredients')
                                         <small class="text-danger">{{ $message }}</small>
@@ -83,7 +79,7 @@
 
                                 <div class="mb-5">
                                     <h5>Instructions</h5>
-                                    <textarea placeholder="Add one or multiple steps" id="instructions" name="instructions" class="form-control" required>{{ old('instructions') }}</textarea>
+                                    <textarea placeholder="Add one or multiple steps" id="instructions" name="instructions" class="form-control">{{ old('instructions') }}</textarea>
 
                                     @error('instructions')
                                         <small class="text-danger">{{ $message }}</small>

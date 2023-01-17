@@ -7,11 +7,11 @@ use App\Models\Recipe;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
-{
-    public function index()
+{   
+    public function __invoke()
     {
         return view('home', [
-            'recipes' => Recipe::take(5)->get(),
+            'recipes' => Recipe::take(8)->get(),
             'categories' => Category::all()
         ]);
     }

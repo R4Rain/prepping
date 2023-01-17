@@ -1,6 +1,7 @@
 <x-app title="Edit Recipe">
-    <div class="container-fluid py-5">
+    <x-navbar></x-navbar>
 
+    <div class="container-fluid py-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card border-0 shadow-sm rounded-4">
@@ -16,7 +17,7 @@
                                 </h4>
 
                                 @method('put')
-                                <button type="submit" class="btn btn-primary rounded-3 px-4">Save</button>
+                                <button type="submit" class="btn btn-secondary rounded-3 px-4">Save</button>
                             </div>
 
                             <div class="container-lg px-lg-5">

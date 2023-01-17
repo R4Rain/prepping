@@ -1,6 +1,7 @@
-<x-app title="{!! $collection->name !!}">
-    <div class="container p-5">
+<x-app title="{!! $collection->name !!}">\
+    <x-navbar></x-navbar>
 
+    <div class="container-lg p-5">
         <div class="card border-0 bg-light rounded-4 mb-4">
             <div class="card-body p-4">
                 <h3>{{ $collection->name }}</h3>

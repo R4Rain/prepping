@@ -44,7 +44,7 @@ class RecipeController extends Controller
     public function store(Request $request)
     {   
         $this->validateRequest($request);
-    
+
         DB::transaction(function () use($request) {
             if ($request->has('photo')) {
                 $extension = $request->file('photo')->getClientOriginalExtension();
@@ -154,14 +154,14 @@ class RecipeController extends Controller
 
         $recipe->delete();
 
-        return redirect()->back();
+        return redirect()->route('recipes.index');
     }
 
     public function validateRequest(Request $request)
     {   
         $request->validate([
             'name' => 'required|string',
-            'categories.*' => 'required|integer',
+            'categories' => 'required',
             'description' => 'required|string',
             'ingredients' => 'required|string',
             'instructions' => 'required|string',

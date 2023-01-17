@@ -1,6 +1,7 @@
 <x-app title="Create Community">
-    <div class="container-fluid py-5">
+    <x-navbar></x-navbar>
 
+    <div class="container-lg py-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card border-0 shadow-sm rounded-4">
@@ -8,13 +9,13 @@
                         <form method="POST" action="{{ route('communities.store') }}" enctype="multipart/form-data">
                             @csrf
 
-                            <div class="d-flex justify-content-between align-items-center bg-white py-4 mb-5 sticky-top">
+                            <div class="d-flex justify-content-between align-items-center bg-white py-4 mb-4 sticky-top">
                                 <h4 class="m-0">
                                     <a href="{{ route('communities.index') }}" class="text-dark">
                                         <i class="bi bi-arrow-left me-2"></i></a>
                                     Create Community
                                 </h4>
-                                <button type="submit" class="btn btn-primary rounded-3 px-4">Save</button>
+                                <button type="submit" class="btn btn-secondary rounded-3 px-4">Save</button>
                             </div>
 
                             <div class="container-lg px-lg-5">

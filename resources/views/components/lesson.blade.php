@@ -1,4 +1,5 @@
-<a href="{{ route('learn.lessons.show', [$course, $lesson]) }}" class="text-decoration-none text-dark h-100" role="button">
+<a href="{{ route('courseslessons.show', [$course, $lesson]) }}" class="text-decoration-none text-dark h-100"
+    role="button">
     <div class="card border-0 rounded-3 bg-light">
         <div class="card-body d-flex flex-row justify-content-between gap-1">
             <div class="d-flex flex-row align-items-center gap-4">

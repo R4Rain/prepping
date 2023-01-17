@@ -8,7 +8,7 @@
                             <div class="col">
                                 <h2>
                                     <a href="{{ url()->previous() }}" class="text-dark">
-                                    <i class="bi bi-arrow-left me-2"></i></a>{{ $lesson->title }}
+                                        <i class="bi bi-arrow-left me-2"></i></a>{{ $lesson->title }}
                                 </h2>
                                 <small>
                                     Published on {{ date('F j, Y', strtotime($lesson->created_at)) }}
@@ -21,13 +21,14 @@
                                 <div class="row g-2">
                                     @if (auth()->user()->role == 'ADMIN')
                                         <div class="col">
-                                            <a href="{{ route('learn.lessons.edit', [$course, $lesson]) }}"
+                                            <a href="{{ route('courseslessons.edit', [$course, $lesson]) }}"
                                                 class="btn btn-primary rounded-3 w-100">
                                                 <i class="bi bi-pencil me-1"></i> Edit
                                             </a>
                                         </div>
                                         <div class="col">
-                                            <form method="POST" action="{{ route('learn.lessons.destroy', [$course, $lesson]) }}">
+                                            <form method="POST"
+                                                action="{{ route('courseslessons.destroy', [$course, $lesson]) }}">
                                                 @csrf
                                                 @method('delete')
                                                 <button class="btn btn-outline-primary rounded-3 w-100" type="submit">

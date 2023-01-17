@@ -15,7 +15,7 @@
                     <a class="nav-link" href="{{ route('recipes.index') }}">Explore</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('learn.index') }}">Learn to Cook</a>
+                    <a class="nav-link" href="{{ route('courses.index') }}">Learn to Cook</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('communities.index') }}">Community</a>
@@ -24,14 +24,27 @@
 
             @if (auth()->check())
                 <div class="d-flex flex-column flex-md-row gap-3">
-                    <a href="{{ route('recipes.create') }}" class="btn btn-primary">
-                        Create a recipe
-                    </a>
-                    @if(auth()->user()->role == 'ADMIN')
-                        <a href="{{ route('learn.create') }}" class="btn btn-success">
-                            Create a course
+                    <div class="dropdown">
+                        <a class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            Create
                         </a>
-                    @endif
+
+                        <ul class="dropdown-menu dropdown-menu-end border-0 p-1 shadow-sm">
+                            <li>
+                                <a href="{{ route('recipes.create') }}" type="button"
+                                    class="dropdown-item p-2 rounded-3">
+                                    {{ __('Recipe') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('communities.create') }}" type="button"
+                                    class="dropdown-item p-2 rounded-3">
+                                    {{ __('Community') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
                     <div class="dropdown">
                         <a class="btn btn-light" type="button" data-bs-toggle="dropdown">
                             <i class="bi bi-person-fill me-1"></i> {{ auth()->user()->name }}
@@ -41,19 +54,19 @@
                             <li>
                                 <a href="{{ route('recipes.manage') }}" type="button"
                                     class="dropdown-item p-2 rounded-3">
-                                    {{ __('Recipes') }}
+                                    {{ __('My recipes') }}
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('collections.index') }}" type="button"
                                     class="dropdown-item p-2 rounded-3">
-                                    {{ __('Collections') }}
+                                    {{ __('My collections') }}
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('subscriptions.index') }}" type="button"
                                     class="dropdown-item p-2 rounded-3">
-                                    {{ __('Subscription') }}
+                                    {{ __('My subscription') }}
                                 </a>
                             </li>
                             <li>
@@ -77,7 +90,7 @@
                     <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#login">
                         Log in
                     </button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#register">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#register">
                         Sign up
                     </button>
                 </div>

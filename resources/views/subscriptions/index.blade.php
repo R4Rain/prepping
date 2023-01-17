@@ -1,6 +1,7 @@
 <x-app title="My Subscription">
-    <div class="container p-5">
+    <x-navbar></x-navbar>
 
+    <div class="container p-5">
         <div class="row">
             <div class="col-4">
                 <x-sidebar></x-sidebar>
@@ -25,39 +26,33 @@
                                     Access all recipes and courses you want. Change or cancel your plan anytime.
                                 </p>
 
-                                <div class="row justify-content-center my-5">
+                                <div class="row justify-content-center my-5" id="subs">
                                     <div class="col-3">
-                                        <label for="gold">
-                                            <div class="card rounded-4 h-100">
-                                                <div class="card-body py-4 text-center">
-                                                    <h5 class="mb-3">Gold</h5>
-                                                    <h5 class="text-primary">$6.99</h5>
-                                                    <span class="text-muted">Yearly subscription</span>
-                                                </div>
+                                        <label for="gold" class="card rounded-4 h-100">
+                                            <div class="card-body py-4 text-center">
+                                                <h5 class="mb-3">Gold</h5>
+                                                <h5 class="text-primary">$6.99</h5>
+                                                <span class="text-muted">Yearly subscription</span>
                                             </div>
                                         </label>
                                         <input type="radio" name="subscription" id="gold" value="gold" hidden>
                                     </div>
                                     <div class="col-3">
-                                        <label for="plus">
-                                            <div class="card rounded-4 h-100">
-                                                <div class="card-body py-4 text-center">
-                                                    <h5 class="mb-3">Plus</h5>
-                                                    <h5 class="text-primary">$1.99</h5>
-                                                    <span class="text-muted">Monthly subscription</span>
-                                                </div>
+                                        <label for="plus" class="card rounded-4 h-100">
+                                            <div class="card-body py-4 text-center">
+                                                <h5 class="mb-3">Plus</h5>
+                                                <h5 class="text-primary">$1.99</h5>
+                                                <span class="text-muted">Monthly subscription</span>
                                             </div>
                                         </label>
                                         <input type="radio" name="subscription" id="plus" value="plus" hidden>
                                     </div>
                                     <div class="col-3">
-                                        <label for="basic" class="h-100">
-                                            <div class="card rounded-4 h-100">
-                                                <div class="card-body py-4 text-center">
-                                                    <h5 class="mb-3">Basic</h5>
-                                                    <h5 class="text-primary">$0.4</h5>
-                                                    <span class="text-muted">One day pass</span>
-                                                </div>
+                                        <label for="basic" class="card rounded-4 h-100">
+                                            <div class="card-body py-4 text-center">
+                                                <h5 class="mb-3">Basic</h5>
+                                                <h5 class="text-primary">$0.4</h5>
+                                                <span class="text-muted">One day pass</span>
                                             </div>
                                         </label>
                                         <input type="radio" name="subscription" id="basic" value="basic" hidden>

@@ -1,15 +1,26 @@
 <x-app title="Communities">
+    <x-navbar></x-navbar>
+
     <div class="container-lg p-5">
         <div class="row justify-content-center">
             <div class="col-md-11">
                 <div class="card border-0 rounded-4 shadow-sm">
                     <div class="card-body p-5">
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <h4 class="m-0">Discover New Communities</h4>
-                            <a href="{{ route('communities.create') }}" class="btn btn-primary rounded-3">
-                                <i class="bi bi-plus-lg me-2"></i>Create community
-                            </a>
-                        </div>
+                        @if (auth()->user()->communities->count() > 0 && auth()->check())
+                            <h4 class="mb-3">My communities</h4>
+                            <div class="row row-cols-4 mb-5">
+                                @foreach (auth()->user()->communities as $community)
+                                    <div class="col">
+                                        <a href="{{ route('communities.show', $community) }}" role="button">
+                                            <img src="/storage/communities/{{ $community->photo }}"
+                                                class="card-img-top rounded-3 mb-3">
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+
+                        <h4 class="mb-4">Discover New Communities</h4>
 
                         @if ($communities->count() > 0)
                             <div class="row row-cols-2">

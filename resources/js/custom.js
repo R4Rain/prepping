@@ -1,5 +1,19 @@
 $(document).ready(function () {
-
+    ClassicEditor
+        .create(document.querySelector('#ingredients'), {
+            toolbar: [ 'heading', '|', 'bold', 'italic', 'bulletedList', 'numberedList' ]
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+    
+    ClassicEditor
+        .create(document.querySelector('#instructions'), {
+            toolbar: [ 'heading', '|', 'bold', 'italic', 'bulletedList', 'numberedList' ]
+        } )
+        .catch( error => {
+            console.error( error );
+        });
     $('#photo').change(function() {
         const file = this.files[0];
         console.log(file);
@@ -19,27 +33,16 @@ $(document).ready(function () {
         }
     });
     
-    ClassicEditor
-        .create(document.querySelector('#ingredients'), {
-            toolbar: [ 'heading', '|', 'bold', 'italic', 'bulletedList', 'numberedList' ]
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
-    
-    ClassicEditor
-        .create(document.querySelector('#instructions'), {
-            toolbar: [ 'heading', '|', 'bold', 'italic', 'bulletedList', 'numberedList' ]
-        } )
-        .catch( error => {
-            console.error( error );
-        });
-
     $('input[name="subscription"]').on('change', function () {
         if ($(this).is(':checked')) {
             $('#btnSubscribe').prop('disabled', false)
         }
     })
+
+    $('#create-post-1 input[name="recipe_id"]').on('change', function () {
+        $('#createPost').prop('hidden', false)
+    });
+
     // const login = new bootstrap.Modal('#login')
     // login.show();
 

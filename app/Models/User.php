@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     public function communities()
     {
-        return $this->hasMany(Collection::class);
+        return $this->hasMany(Community::class);
     }
 
     public function isMember($communityID)

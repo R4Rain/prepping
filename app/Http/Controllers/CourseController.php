@@ -7,27 +7,36 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+{   
+    public function __construct()
+    {
+        $this->middleware(['auth'])->except('index');
+        $this->middleware(['admin'])->except('index', 'show');
+    }
+
     public function index()
     {
-        return view('learn.index', [
+        return view('courses.index', [
             'courses' => Course::all()->take(5),
+        ]);
+    }
+
+    public function manage()
+    {
+        return view('courses.manage', [
+            'courses' => Course::all(),
         ]);
     }
 
     public function create()
     {
-        return view('learn.create');
+        return view('courses.create');
     }
 
     public function store(Request $request)
     {
         $this->validateRequest($request);
+
         if($request->has('photo')) {
             $extension = $request->file('photo')->getClientOriginalExtension();
             $proofNameToStore = $request->title . '.' . $extension;
@@ -38,19 +47,19 @@ class CourseController extends Controller
             'photo' => $proofNameToStore,
             'description' => $request->description,
         ]);
-        return redirect()->route('learn.index');
+        return redirect()->route('courses.manage');
     }
 
     public function show(Course $course)
     {
-        return view('learn.show', [
+        return view('courses.show', [
             'course' => $course,
         ]);
     }
 
     public function edit(Course $course)
     {
-        return view('learn.edit', [
+        return view('courses.edit', [
             'course' => $course,
         ]);
     }
@@ -73,7 +82,7 @@ class CourseController extends Controller
             'description' => $request->description,
             'photo' => $proofNameToStore,
         ]);
-        return redirect()->route('learn.show', $course);
+        return redirect()->route('courses.show', $course);
     }
 
     public function destroy(Course $course)
@@ -83,7 +92,7 @@ class CourseController extends Controller
         }
         $course->delete();
         
-        return redirect()->route('learn.index');
+        return redirect()->route('courses.index');
     }
 
     public function validateRequest(Request $request)

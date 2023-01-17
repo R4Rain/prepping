@@ -1,4 +1,6 @@
 <x-app title="{!! $category->name !!}">
+    <x-navbar></x-navbar>
+
     <div class="container-lg p-5">
         <div class="row justify-content-center">
             <div class="col-md-11">

@@ -4,7 +4,7 @@
             <div class="col-md-8">
                 <div class="card border-0 shadow-sm rounded-4">
                     <div class="card-body p-5 pt-4">
-                        <form method="POST" action="{{ route('learn.lessons.store', $course) }}">
+                        <form method="POST" action="{{ route('courseslessons.store', $course) }}">
                             @csrf
                             <div class="d-flex justify-content-between align-items-center bg-white py-4 mb-5 sticky-top">
                                 <h4 class="m-0">

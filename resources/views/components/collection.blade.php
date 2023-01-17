@@ -15,7 +15,7 @@
 
                     <div class="mb-4">
                         @forelse (auth()->user()->collections as $collection)
-                            <div class="card rounded-4">
+                            <div class="card rounded-4 mb-3">
                                 <div class="card-body">
                                     <div class="row g-0">
                                         <div class="col">
