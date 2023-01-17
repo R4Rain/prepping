@@ -43,12 +43,6 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-
-                            <div class="mb-5">
-                                <h5>Materials<small class="text-danger ms-1"></small></h5>
-                                <div class="text-muted mb-2">Upload some file references for your lesson</div>
-                                <input type="file" id="materials" name="materials[]" class="form-control mt-3" required>
-                            </div>
                         </form>
                     </div>
                 </div>

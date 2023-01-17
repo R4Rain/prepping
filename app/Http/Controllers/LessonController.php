@@ -79,13 +79,6 @@ class LessonController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Course $course, Lesson $lesson)
     {
         $this->validateRequest($request);
@@ -99,12 +92,6 @@ class LessonController extends Controller
         return redirect()->route('learn.show', $course);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Course $course, Lesson $lesson)
     {
         $lesson->delete();
