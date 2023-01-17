@@ -11,7 +11,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             CategorySeeder::class,
-            CollectionSeeder::class
+            CollectionSeeder::class,
+            RecipeSeeder::class,
+            CategoryDetailSeeder::class,
+            CourseSeeder::class,
+            LessonSeeder::class,
+            CommunitySeeder::class,
         ]);
     }
 }

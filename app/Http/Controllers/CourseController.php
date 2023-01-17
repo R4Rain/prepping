@@ -45,6 +45,7 @@ class CourseController extends Controller
         Course::create([
             'title' => $request->title,
             'photo' => $proofNameToStore,
+            'estimated_finish' => $request->estimated_finish,
             'description' => $request->description,
         ]);
         return redirect()->route('courses.manage');
@@ -52,8 +53,16 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
+        $total_completed = 0;
+        $user_id = auth()->user()->id;
+        foreach($course->lessons as $lesson){
+            if($lesson->lessonStatus->contains('user_id', $user_id)){
+                $total_completed += 1;
+            }
+        }
         return view('courses.show', [
             'course' => $course,
+            'total_completed' => $total_completed,
         ]);
     }
 
@@ -80,6 +89,7 @@ class CourseController extends Controller
         $course->update([
             'title' => $request->title,
             'description' => $request->description,
+            'estimated_finish' => $request->estimated_finish,
             'photo' => $proofNameToStore,
         ]);
         return redirect()->route('courses.show', $course);
@@ -100,7 +110,8 @@ class CourseController extends Controller
         $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
-            'photo' => 'image|mimes:jpeg,jpg,png,webp'
+            'estimated_finish' => 'required|integer|min:1',
+            'photo' => 'image|mimes:jpeg,jpg,png,webp',
         ]);
     }
 }

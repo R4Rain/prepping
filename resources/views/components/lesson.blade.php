@@ -11,7 +11,7 @@
                     <div class="text-muted">{{ $lesson->subtitle }}</div>
                 </div>
             </div>
-            @if (1)
+            @if ($lesson->lessonStatus->contains('user_id', auth()->user()->id))
                 <div class="d-flex align-items-center me-2">
                     <i class="bi bi-check-circle-fill fs-1 text-primary"></i>
                 </div>

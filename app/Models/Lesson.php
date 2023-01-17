@@ -14,6 +14,6 @@ class Lesson extends Model
     protected $guarded = [];
 
     public function lessonStatus(){
-        return $this->hasOne(LessonStatus::class);
+        return $this->hasMany(LessonStatus::class);
     }
 }

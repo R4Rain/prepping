@@ -1,3 +1,6 @@
 *
 !assets/
+!recipes/
+!courses/
+!communities/
 !.gitignore
