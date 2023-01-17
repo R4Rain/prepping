@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -30,6 +31,8 @@ class LessonSeeder extends Seeder
                     <p><b>Julienne<span>&nbsp;</span></b><span>Also sometimes called the matchstick cut, this slices a vegetable into long, thin strips.&nbsp;</span></p>
                     <p><b>Chiffonade<span>&nbsp;</span></b><span>This technique is used to finely cut herbs or leafy vegetables for a dish. To chiffonade, you make a small stack of leaves, roll them into a tight cylinder, then slice thin rounds from the roll to make ribbons.&nbsp;</span></p>
                 ",
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'course_id' => 1,
@@ -43,6 +46,8 @@ class LessonSeeder extends Seeder
                     <p><b>Steam<span>&nbsp;</span></b><span>When you steam food, you put it in a basket or colander and set it over (but not in!) a pot or pan of boiling water, to allow the steam from the water to cook the ingredient. It&rsquo;s a&nbsp;healthy way to prepare veggies&nbsp;like broccoli, cauliflower and green beans, and is also great for seafood like shrimp, mussels and clams.</span></p>
                     <p><b>Poach<span>&nbsp;</span></b><span>One of the most underrated ways to cook meat and seafood is&nbsp;poaching</span><span>. You simply bring a cooking liquid (like broth or wine) to a simmer, and let your main ingredient cook in it until it&rsquo;s done. Poaching cooks the food without drying it out, so you get moist, perfect results every time. Poached meat and seafood also makes a flavorful, protein-rich ingredient to add to other dishes. Use shredded poached chicken in tacos, or poached shrimp in salads and grain bowls. Master the simple technique for poaching chicken, shrimp or salmon.</span></p>
                 ",
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'course_id' => 1,
@@ -51,6 +56,8 @@ class LessonSeeder extends Seeder
                 'content' => "
                     <p><span>Fortunately, certain cooking techniques and tricks can make roasting even simpler and more delicious. For instance, roasting a chicken can take a few hours&mdash;but if you butterfly or spatchcock the chicken first (i.e. make a few cuts and flatten it), you&rsquo;ll reduce the cooking time and still end up with a juicy, flavorful bird.</span><span>&nbsp;Learn&nbsp;how to roast a spatchcocked chicken</span><span>&nbsp;using this simple technique. Love roasted veggies? You can get better results with a few key moves:&nbsp;how to roast a spatchcocked chicken</span><span>, including faster-cooking ones like asparagus and zucchini, medium ones like broccoli and eggplant, and slower ones like potatoes and beets. If you want to perfect your squash game, find out&nbsp;how to peel, cut and roast butternut squash</span><span>. No matter what vegetable you&rsquo;re roasting, you'll be able to tell when it's ready by sticking a knife into the center of a piece. If the knife goes in easily and the edges of the vegetable are a nice golden brown, it&rsquo;s done.</span></p>
                 ",
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'course_id' => 2,
@@ -60,6 +67,8 @@ class LessonSeeder extends Seeder
                     <p>Every guide like this starts out with the same advice: Read the recipe all the way to the end before you start cooking anything. That&rsquo;s because even if it feels like kind of a cop move to read and follow the recipe, actually doing so removes much of the stress you might associate with cooking &mdash; which often happens when the pan is searing hot and you realize you need soy sauce right that second. Read the ingredients list too! It tells a story, and all too often hides some of the prep, like chopping onions or grating cheese or even entire sub-recipes (maybe skip anything with sub-recipes). If there&rsquo;s a term you don&rsquo;t understand, google it. Almost every mysterious recipe term has been clearly defined online now.</p>
                     <p>Do your best as a beginner to follow the recipe, but also give yourself permission to deviate if the current situation means you don&rsquo;t have an ingredient or piece of equipment on hand. Every recipe not written during World War II or in spring 2020 assumes a certain American bourgeois abundance. There&rsquo;s been a run on garlic? Your tomato sauce will lack some pleasure, but it will still be tomato sauce. Only a few things will utterly wreck a non-baked good: burning it, undercooking it, oversalting it, or, in certain cases, depriving it of moisture. Undersalting will make things taste flat and disappointing, but you can still eat them. Oil plus salt plus fire is as basic as cooking gets, and if you have those things and something you can cook, you have a meal.</p>
                 ',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         ]);
     }

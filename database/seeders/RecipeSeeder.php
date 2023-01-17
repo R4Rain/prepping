@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -53,6 +54,8 @@ class RecipeSeeder extends Seeder
                 'servings' => 3,
                 'prep_time' => 100,
                 'cook_time' => 20,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'user_id' => 3,
@@ -118,6 +121,8 @@ class RecipeSeeder extends Seeder
                 'servings' => 1,
                 'prep_time' => 60,
                 'cook_time' => 120,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'user_id' => 4,
@@ -153,6 +158,8 @@ class RecipeSeeder extends Seeder
                 'servings' => 4,
                 'prep_time' => 60,
                 'cook_time' => 60,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'user_id' => 2,
@@ -189,6 +196,8 @@ class RecipeSeeder extends Seeder
                 'servings' => 2,
                 'prep_time' => 30,
                 'cook_time' => 130,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'user_id' => 3,
@@ -242,6 +251,8 @@ class RecipeSeeder extends Seeder
                 'servings' => 10,
                 'prep_time' => 15,
                 'cook_time' => 55,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'user_id' => 4,
@@ -293,6 +304,8 @@ class RecipeSeeder extends Seeder
                 'servings' => 18,
                 'prep_time' => 30,
                 'cook_time' => 135,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'user_id' => 2,
@@ -337,6 +350,8 @@ class RecipeSeeder extends Seeder
                 'servings' => 4,
                 'prep_time' => 30,
                 'cook_time' => 90,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'user_id' => 3,
@@ -364,6 +379,8 @@ class RecipeSeeder extends Seeder
                 'servings' => 4,
                 'prep_time' => 10,
                 'cook_time' => 20,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'user_id' => 4,
@@ -390,6 +407,8 @@ class RecipeSeeder extends Seeder
                 'servings' => 4,
                 'prep_time' => 15,
                 'cook_time' => 35,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'user_id' => 2,
@@ -428,6 +447,8 @@ class RecipeSeeder extends Seeder
                 'servings' => 4,
                 'prep_time' => 15,
                 'cook_time' => 30,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'user_id' => 3,
@@ -487,6 +508,8 @@ class RecipeSeeder extends Seeder
                 'servings' => 1,
                 'prep_time' => 30,
                 'cook_time' => 105,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'user_id' => 4,
@@ -540,6 +563,8 @@ class RecipeSeeder extends Seeder
                 'servings' => 6,
                 'prep_time' => 20,
                 'cook_time' => 60,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'user_id' => 2,
@@ -576,6 +601,8 @@ class RecipeSeeder extends Seeder
                 'servings' => 6,
                 'prep_time' => 25,
                 'cook_time' => 140,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'user_id' => 3,
@@ -632,6 +659,8 @@ class RecipeSeeder extends Seeder
                 'servings' => 6,
                 'prep_time' => 45,
                 'cook_time' => 170,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'user_id' => 4,
@@ -688,6 +717,8 @@ class RecipeSeeder extends Seeder
                 'servings' => 5,
                 'prep_time' => 20,
                 'cook_time' => 60,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         ]);
     }
