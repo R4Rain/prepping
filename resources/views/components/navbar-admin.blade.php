@@ -7,22 +7,18 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="menu">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('courses.manage') }}">Courses</a>
-                </li>
-            </ul>
-
-            <div class="d-flex flex-column flex-md-row gap-3">
+            <div class="d-flex flex-column flex-md-row gap-3 ms-auto">
                 <div class="dropdown">
                     <a class="btn btn-light" type="button" data-bs-toggle="dropdown">
                         <i class="bi bi-person-fill me-1"></i> {{ auth()->user()->name }}
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end border-0 p-1 shadow-sm">
+                        <li>
+                            <a href="{{ route('courses.manage') }}" type="button" class="dropdown-item p-2 rounded-3">
+                                {{ __('Courses') }}
+                            </a>
+                        </li>
                         <li>
                             <a href="{{ route('logout') }}" type="button" class="dropdown-item p-2 rounded-3"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">

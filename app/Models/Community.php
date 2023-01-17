@@ -18,6 +18,11 @@ class Community extends Model
         return $this->belongsToMany(User::class, 'community_details');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function feeds()
     {
         return $this->hasManyThrough(Feed::class, CommunityDetail::class, 'community_id', 'community_detail_id');

@@ -127,7 +127,7 @@ class RecipeSeeder extends Seeder
             [
                 'user_id' => 4,
                 'name' => 'Blueberry Cornmeal Skillet Cake',
-                'photo' => 'Blueberry cornmeal skillet cake.webp',
+                'photo' => 'Blueberry cornmeal skillet cake.jpg',
                 'description' => 'This is a brilliant oven-to-table dish: simply bake in a cast-iron skillet and serve warm, straight from the pan, topped with vanilla ice cream. Alternatively, if you want to serve this cut into slices, more like a cake, line the base of your pan with baking paper first, so you an easily lift it out once baked.',
                 'ingredients' => '
                     <ul>
@@ -164,7 +164,7 @@ class RecipeSeeder extends Seeder
             [
                 'user_id' => 2,
                 'name' => 'Ricotta & Almond Cake',
-                'photo' => 'Ricotta & almond cake.webp',
+                'photo' => 'Ricotta & almond cake.jpg',
                 'description' => 'This is the only cake I’ve ever baked in my life. It was a cake that was run as a special at Palatino and every time I made it, it sank. I did it at home and, instead of baking it in a cake tin, I did it in a tray and it worked. So here. Here’s a cake recipe. I hope it doesn’t sink.',
                 'ingredients' => '
                     <ul>

@@ -31,12 +31,19 @@ class Recipe extends Model
         });
     }
 
-    public function getHours($time){
+    public function getHours($time)
+    {
         return round($time / 60);
     }
     
-    public function getMinutes($time){
+    public function getMinutes($time)
+    {
         return $time % 60;
+    }
+
+    public function getRating(Recipe $recipe)
+    {
+        return $recipe->ratings()->avg('value');
     }
 
     public function user()

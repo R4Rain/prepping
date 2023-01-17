@@ -6,7 +6,8 @@
             <div class="col-md-11">
                 <div class="card border-0 rounded-4 shadow-sm">
                     <div class="card-body p-5">
-                        @if (auth()->user()->communities->count() > 0 && auth()->check())
+                        @if (auth()->check() &&
+                                auth()->user()->communities->count() > 0)
                             <h4 class="mb-3">My communities</h4>
                             <div class="row row-cols-4 mb-5">
                                 @foreach (auth()->user()->communities as $community)
@@ -23,7 +24,7 @@
                         <h4 class="mb-4">Discover New Communities</h4>
 
                         @if ($communities->count() > 0)
-                            <div class="row row-cols-2">
+                            <div class="row row-cols-3 g-5">
                                 @foreach ($communities as $community)
                                     <div class="col">
                                         <x-community :community='$community'></x-community>

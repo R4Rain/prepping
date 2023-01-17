@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Collection;
 use App\Models\CollectionDetail;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 
 class CollectionDetailController extends Controller
@@ -88,8 +90,10 @@ class CollectionDetailController extends Controller
      * @param  \App\Models\CollectionDetail  $collectionDetail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CollectionDetail $collectionDetail)
-    {
-        //
+    public function destroy(Collection $collection, Recipe $recipe)
+    {   
+        CollectionDetail::where([['recipe_id', $recipe->id], ['collection_id', $collection->id]])->delete();
+
+        return redirect()->back();
     }
 }

@@ -6,34 +6,76 @@
             <div class="col-md-11">
                 <div class="card border-0 rounded-4 shadow-sm mb-4">
                     <div class="card-body p-5 d-flex justify-content-between align-items-start">
-                        <div>
-                            <h4>{{ $community->name }}</h4>
-                            {{ $community->members->count() }}
-                            {{ $community->members->count() > 1 ? 'members' : 'member' }}
-                            <i class="bi bi-dot"></i>
-                            {{ $community->feeds->count() }}
-                            {{ $community->feeds->count() > 1 ? 'feeds' : 'feed' }}
+                        <div class="d-flex">
+                            <img src="/storage/communities/{{ $community->photo }}" class="rounded-4 me-3" width="100">
+                            <div>
+                                <h4>{{ $community->name }}</h4>
+                                <div class="mb-2">
+                                    {{ $community->members->count() }}
+                                    {{ $community->members->count() > 1 ? 'members' : 'member' }}
+                                    <i class="bi bi-dot"></i>
+                                    {{ $community->feeds->count() }}
+                                    {{ $community->feeds->count() > 1 ? 'feeds' : 'feed' }}
+                                </div>
+                                <div>By <b>{{ $community->user->name }}</b></div>
+                            </div>
                         </div>
 
-                        @if (auth()->user()->isMember($community->id))
+                        @if (auth()->user()->id == $community->user_id)
                             <div class="d-flex gap-3">
-                                <button type="button" class="btn btn-light rounded-3 px-4">
-                                    <i class="bi bi-people-fill me-1"></i> Joined
-                                </button>
+                                <a href="{{ route('communities.edit', $community) }}" type="submit"
+                                    class="btn btn-outline-secondary rounded-3 px-4">
+                                    Edit
+                                </a>
                                 <button type="button" class="btn btn-secondary rounded-3 px-4" data-bs-toggle="modal"
                                     data-bs-target="#create-post-1">
                                     Create post
                                 </button>
                             </div>
+                        @elseif (auth()->user()->isMember($community->id))
+                            <div class="d-flex gap-3">
+                                <button type="submit" class="btn btn-light rounded-3 px-4" data-bs-toggle="modal"
+                                    data-bs-target="#leave">
+                                    <i class="bi bi-people-fill me-1"></i> Joined
+                                </button>
+
+                                <button type="button" class="btn btn-secondary rounded-3 px-4" data-bs-toggle="modal"
+                                    data-bs-target="#create-post-1">
+                                    Create post
+                                </button>
+                            </div>
+
+                            <div class="modal fade" id="leave" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content border-0 rounded-4">
+                                        <div class="modal-body text-center p-5">
+                                            <h4 class="mb-4">Leave Confirmation</h4>
+
+                                            <form method="POST"
+                                                action="{{ route('community-details.destroy', $community) }}">
+                                                @csrf
+
+                                                <p class="mb-4">Are you sure want to leave this group?</p>
+
+                                                <button type="button" class="btn btn-outline-light rounded-3 px-4 me-2"
+                                                    data-bs-dismiss="modal">
+                                                    Cancel
+                                                </button>
+
+                                                <input type="hidden" name="_method" value='DELETE'>
+                                                <button type="submit"
+                                                    class="btn btn-primary rounded-3 px-4">Continue</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @else
                             <form method="POST" action="{{ route('community-details.store') }}">
                                 @csrf
-
                                 <input type="hidden" name="community_id" value="{{ $community->id }}">
 
-                                <button type="submit" class="btn btn-primary rounded-3 px-4">
-                                    Join
-                                </button>
+                                <button type="submit" class="btn btn-secondary rounded-3 px-4 me-2">Join</button>
                             </form>
                         @endif
                     </div>
@@ -63,7 +105,8 @@
         <form method="POST" action="{{ route('feeds.store') }}">
             @csrf
 
-            <input type="hidden" value="{{ auth()->user()->isMember($community->id)->id }}" name="community_detail_id">
+            <input type="hidden" value="{{ auth()->user()->isMember($community->id)->id }}"
+                name="community_detail_id">
 
             <div class="modal fade" id="create-post-1" tabindex="-1">
                 <div class="modal-dialog">

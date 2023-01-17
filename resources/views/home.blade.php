@@ -27,7 +27,7 @@
         <div class="container-lg p-5">
             <div class="row">
                 <div class="col-5">
-                    <div class="card border-0 rounded-4 mb-4">
+                    <div class="card border-0 rounded-4 shadow-sm mb-4">
                         <div class="card-body p-4">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4>Gold</h4>
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card border-0 rounded-4 mb-4">
+                    <div class="card border-0 rounded-4 shadow-sm mb-4">
                         <div class="card-body p-4">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4>Plus</h4>
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card border-0 rounded-4">
+                    <div class="card border-0 rounded-4 shadow-sm">
                         <div class="card-body p-4">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4>Basic</h4>
@@ -82,7 +82,7 @@
 
             <div class="card border-0 rounded-4 shadow-sm">
                 <div class="card-body p-5">
-                    <div class="row row-cols-4 mb-4">
+                    <div class="row row-cols-3 gx-4 gy-5 mb-5">
                         @foreach ($recipes as $recipe)
                             <div class="col">
                                 <x-recipe :recipe='$recipe'></x-recipe>
@@ -91,7 +91,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button type="button" class="btn btn-primary rounded-3 px-3">View all</button>
+                        <a href="{{ route('recipes.index') }}" class="btn btn-primary rounded-3 px-5">View all</a>
                     </div>
                 </div>
             </div>

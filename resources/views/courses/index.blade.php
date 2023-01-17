@@ -13,17 +13,17 @@
 
                         <div class="container-lg">
                             @forelse ($courses as $course)
-                                <div class="mb-3">
-                                    <a href="{{ route('courses.show', $course) }}"
-                                        class="text-decoration-none text-dark h-100" role="button">
-                                        <div class="row mb-3">
+                                <div class="mb-5">
+                                    <a href="{{ route('courses.show', $course) }}" class="text-decoration-none text-dark"
+                                        role="button">
+                                        <div class="row">
                                             <div class="col-5">
-                                                <img src="/storage/courses/{{ $course->photo }}"
-                                                    class="card-img-top rounded-3 mb-3">
+                                                <img src="/storage/courses/{{ $course->photo }}" width="100%"
+                                                    class="rounded-4">
                                             </div>
                                             <div class="col">
-                                                <h5 class="mb-0">{{ $course->title }}</h5>
-                                                <p>{{ $course->description }}</p>
+                                                <h5>{{ $course->title }}</h5>
+                                                <small class="text-muted">{{ $course->description }}</small>
                                             </div>
                                         </div>
                                     </a>

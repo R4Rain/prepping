@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\ReplyController;
@@ -25,7 +26,8 @@ Auth::routes();
 Route::get('/', HomeController::class)->name('home');
 Route::get('search', [HomeController::class, 'search'])->name('search');
 Route::get('dashboard', DashboardController::class)->name('dashboard');
-
+Route::get('profile', ProfileController::class)->name('profile');
+Route::put('profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
 
 
 Route::prefix('recipes')->name('recipes.')->group(function () {
@@ -37,7 +39,6 @@ Route::resource('subscriptions', SubscriptionController::class);
 Route::resource('comments', CommentController::class);
 Route::resource('replies', ReplyController::class);
 Route::resource('collections', CollectionController::class);
-Route::resource('collection-details', CollectionDetailController::class);
 Route::resource('ratings', RatingController::class);
 Route::resource('categories', CategoryController::class);
 
@@ -46,11 +47,22 @@ Route::prefix('courses')->name('courses.')->group(function () {
 });
 Route::resource('courses', CourseController::class);
 
-Route::resource('courseslessons', LessonController::class)->parameters([
-    'learn' => 'course'
-]);
+Route::resource('lessons', LessonController::class);
 Route::resource('communities', CommunityController::class);
-Route::resource('community-details', CommunityDetailController::class);
+
+
+Route::prefix('community-details')->name('community-details.')->group(function () {
+    Route::delete('destroy/{community}', [CommunityDetailController::class, 'destroy'])->name('destroy');
+});
+Route::resource('community-details', CommunityDetailController::class)->except('destroy');
+
+
+Route::prefix('collection-details')->name('collection-details.')->group(function () {
+    Route::delete('destroy/{collection}/{recipe}', [CollectionDetailController::class, 'destroy'])->name('destroy');
+});
+Route::resource('collection-details', CollectionDetailController::class)->except('destroy');
+
+
 Route::resource('feeds', FeedController::class);
 
 

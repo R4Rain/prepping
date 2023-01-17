@@ -12,6 +12,7 @@ class CourseController extends Controller
     {
         $this->middleware(['auth'])->except('index');
         $this->middleware(['admin'])->except('index', 'show');
+        $this->middleware(['premiumUser'])->only('show');
     }
 
     public function index()
@@ -92,7 +93,7 @@ class CourseController extends Controller
             'estimated_finish' => $request->estimated_finish,
             'photo' => $proofNameToStore,
         ]);
-        return redirect()->route('courses.show', $course);
+        return redirect()->route('courses.manage');
     }
 
     public function destroy(Course $course)

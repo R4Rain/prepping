@@ -27,11 +27,7 @@
                                     <div class="card-body d-flex justify-content-center align-items-center gap-5">
                                         <div>
                                             <i class="bi bi-star-fill text-primary me-1"></i>
-                                            @if ($recipe->ratings->count() > 0)
-                                                {{ (float) $recipe->ratings->sum('value') / (float) $recipe->ratings->count() }}
-                                            @else
-                                                0
-                                            @endif
+                                            {{ $recipe->ratings->count() > 0 ? $recipe->getRating($recipe) : '0' }}
                                         </div>
                                         <div>
                                             <i class="bi bi-clock text-primary me-1"></i>
@@ -55,19 +51,19 @@
                                     @if ($recipe->user->id != auth()->user()->id)
                                         <div class="col">
                                             <button type="button" class="btn btn-secondary rounded-3 w-100"
-                                                data-bs-toggle="modal" data-bs-target="#collection">
-                                                <i class="bi bi-bookmark me-1"></i> Save
+                                                data-bs-toggle="modal" data-bs-target="#collection"
+                                                {{ $saved ? 'disabled' : '' }}>
+                                                <i
+                                                    class="bi {{ $saved ? 'bi-bookmark-fill' : 'bi-bookmark' }} me-1"></i>
+                                                {{ $saved ? 'Saved' : 'Save' }}
                                             </button>
                                         </div>
                                         <div class="col">
                                             <button type="button" class="btn btn-outline-secondary rounded-3 w-100"
-                                                data-bs-toggle="modal" data-bs-target="#rate">
-                                                <i class="bi bi-star me-1"></i>
-                                                @if ($user_rating)
-                                                    Edit Rating
-                                                @else
-                                                    Rate
-                                                @endif
+                                                data-bs-toggle="modal" data-bs-target="#rate"
+                                                {{ $rated ? 'disabled' : '' }}>
+                                                <i class="bi {{ $rated ? 'bi-star-fill' : 'bi-star' }} me-1"></i>
+                                                {{ $rated ? 'Rated' : 'Rate' }}
                                             </button>
                                         </div>
                                     @else
@@ -226,102 +222,58 @@
 
     <div class="modal fade" id="rate" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0">
-                <div class="modal-body p-5">
-                    @if ($user_rating == null)
-                        <div class="mb-4">
-                            <h4 class="text-center">Give Rating</h4>
-                        </div>
-                        <form method="POST" action="{{ route('ratings.store') }}">
-                            @csrf
-                            <input type="hidden" value="{{ $recipe->id }}" name="recipe_id">
-                            <div class="mb-3">
-                                <button id="rate-1" type="button"
-                                    class="px-0 py-0 border-0 bg-transparent text-secondary" value="1"><i
-                                        class="bi bi-star-fill"></i></button>
-                                <button id="rate-2" type="button"
-                                    class="px-0 py-0 border-0 bg-transparent text-secondary" value="2"><i
-                                        class="bi bi-star-fill"></i></button>
-                                <button id="rate-3" type="button"
-                                    class="px-0 py-0 border-0 bg-transparent text-secondary" value="3"><i
-                                        class="bi bi-star-fill"></i></button>
-                                <button id="rate-4" type="button"
-                                    class="px-0 py-0 border-0 bg-transparent text-secondary" value="4"><i
-                                        class="bi bi-star-fill"></i></button>
-                                <button id="rate-5" type="button"
-                                    class="px-0 py-0 border-0 bg-transparent text-secondary" value="5"><i
-                                        class="bi bi-star-fill"></i></button>
-                                <span id="rating-value" class="text-muted ms-1">0</span>
-                                <input type="text" value="0" id="input-rating" name="value" hidden>
-                            </div>
-                            <button type="submit" class="btn btn-primary rounded-3">
-                                Confirm
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-body p-5 text-center">
+                    <h4 class="mb-4">Give Rating</h4>
+
+                    <form method="POST" action="{{ route('ratings.store') }}" class="mb-3">
+                        @csrf
+
+                        <input type="hidden" value="{{ $recipe->id }}" name="recipe_id">
+                        <input type="hidden" value="0" id="value" name="value">
+
+                        <div id="input-rating" class="mb-4">
+                            <button id="rate-1" type="button" class="text-muted" value="1">
+                                <i class="bi bi-star-fill fs-1"></i>
                             </button>
-                        </form>
-                    @else
-                        <div class="mb-4">
-                            <h4 class="text-center">Update Rating</h4>
-                        </div>
-                        <form method="POST" action="{{ route('ratings.update', $user_rating) }}">
-                            @csrf
-                            <input type="hidden" value="{{ $recipe->id }}" name="recipe_id">
-                            <div>Current rating: {{ $user_rating->value }}</div>
-                            <div class="mb-3">
-                                <button id="rate-1" type="button"
-                                    class="px-0 py-0 border-0 bg-transparent text-secondary" value="1"><i
-                                        class="bi bi-star-fill"></i></button>
-                                <button id="rate-2" type="button"
-                                    class="px-0 py-0 border-0 bg-transparent text-secondary" value="2"><i
-                                        class="bi bi-star-fill"></i></button>
-                                <button id="rate-3" type="button"
-                                    class="px-0 py-0 border-0 bg-transparent text-secondary" value="3"><i
-                                        class="bi bi-star-fill"></i></button>
-                                <button id="rate-4" type="button"
-                                    class="px-0 py-0 border-0 bg-transparent text-secondary" value="4"><i
-                                        class="bi bi-star-fill"></i></button>
-                                <button id="rate-5" type="button"
-                                    class="px-0 py-0 border-0 bg-transparent text-secondary" value="5"><i
-                                        class="bi bi-star-fill"></i></button>
-                                <span id="rating-value" class="text-muted ms-1">0</span>
-                                <input type="text" value="0" id="input-rating" name="value" hidden>
-                            </div>
-                            @method('put')
-                            <button type="submit" class="btn btn-primary rounded-3">
-                                Confirm
+                            <button id="rate-2" type="button" class="text-muted" value="2">
+                                <i class="bi bi-star-fill fs-1"></i>
                             </button>
-                            <a class="btn btn-outline-primary rounded-3"
-                                onclick="event.preventDefault();document.getElementById('delete-rating').submit();">
-                                <i class="bi bi-trash3 me-1"></i> Delete
-                            </a>
-                        </form>
-                        <form id='delete-rating' method="POST"
-                            action="{{ route('ratings.destroy', $user_rating) }}">
-                            @csrf
-                            @method('delete')
-                        </form>
-                    @endif
+                            <button id="rate-3" type="button" class="text-muted" value="3">
+                                <i class="bi bi-star-fill fs-1"></i>
+                            </button>
+                            <button id="rate-4" type="button" class="text-muted" value="4">
+                                <i class="bi bi-star-fill fs-1"></i>
+                            </button>
+                            <button id="rate-5" type="button" class="text-muted" value="5">
+                                <i class="bi bi-star-fill fs-1"></i>
+                            </button>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary rounded-3 px-4">Confirm</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
     <script>
         // Global variable
         const MAX_STARS = 5;
-        const CURR_STYLE = "px-0 py-0 border-0 bg-transparent";
+        const CURR_STYLE = "p-0 border-0 bg-transparent";
         var ratings = [];
 
         function changeStar(index) {
             for (var i = 1; i <= MAX_STARS; i++) {
                 if (i <= index) ratings[i - 1].className = CURR_STYLE + " text-primary";
-                else ratings[i - 1].className = CURR_STYLE + " text-secondary";
+                else ratings[i - 1].className = CURR_STYLE + " text-muted";
             }
         }
 
         function handleRate(e) {
             var index = e.currentTarget.value;
             changeStar(index);
-            document.getElementById('input-rating').value = index;
-            document.getElementById('rating-value').innerHTML = index;
+            document.getElementById('value').value = index;
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -331,7 +283,7 @@
                     ratings[i - 1].addEventListener('click', handleRate);
                 }
             }
-            var el = document.getElementById('input-rating');
+            var el = document.getElementById('value');
             if (el) {
                 changeStar(el.value);
             }

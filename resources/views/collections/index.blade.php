@@ -10,21 +10,14 @@
                 @if ($collections->count() > 0)
                     <div class="card border-0 bg-white rounded-4">
                         <div class="card-body p-4">
-                            <h3 class="mb-4">My Collections</h3>
+                            <h4 class="mb-4">My Collections</h4>
 
                             @foreach ($collections as $collection)
                                 <a type="button" href="{{ route('collections.show', $collection) }}"
-                                    class="card rounded-4 text-decoration-none text-dark">
+                                    class="card collection-card rounded-4 text-decoration-none text-dark">
                                     <div class="card-body p-4">
-                                        <div class="row g-0">
-                                            <div class="col">
-                                                <h5>{{ $collection->name }}</h5>
-                                                <small>{{ $collection->recipes->count() }} recipes</small>
-                                            </div>
-                                            <div class="col-1 my-auto text-end">
-                                                <i class="bi bi-chevron-right"></i>
-                                            </div>
-                                        </div>
+                                        <h5 class="fw-semibold">{{ $collection->name }}</h5>
+                                        <small>{{ $collection->recipes->count() }} recipes</small>
                                     </div>
                                 </a>
                             @endforeach

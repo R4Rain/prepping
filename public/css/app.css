@@ -20104,3 +20104,13 @@ body {
   border: none;
   border-radius: 0.5rem;
 }
+
+.recipe-card:hover p, .collection-card:hover h5, .collection-card:hover .h5 {
+  color: #eb7c04;
+}
+
+#input-rating button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}

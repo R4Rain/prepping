@@ -45,52 +45,16 @@
                         </ul>
                     </div>
 
-                    <div class="dropdown">
-                        <a class="btn btn-light" type="button" data-bs-toggle="dropdown">
-                            <i class="bi bi-person-fill me-1"></i> {{ auth()->user()->name }}
-                        </a>
-
-                        <ul class="dropdown-menu dropdown-menu-end border-0 p-1 shadow-sm">
-                            <li>
-                                <a href="{{ route('recipes.manage') }}" type="button"
-                                    class="dropdown-item p-2 rounded-3">
-                                    {{ __('My recipes') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('collections.index') }}" type="button"
-                                    class="dropdown-item p-2 rounded-3">
-                                    {{ __('My collections') }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('subscriptions.index') }}" type="button"
-                                    class="dropdown-item p-2 rounded-3">
-                                    {{ __('My subscription') }}
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="m-1">
-                            </li>
-                            <li>
-                                <a href="{{ route('logout') }}" type="button" class="dropdown-item p-2 rounded-3"
-                                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    style="display: none;">
-                                    @csrf
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
+                    <a href="{{ route('recipes.manage') }}" class="btn btn-light rounded-3" type="button">
+                        <i class="bi bi-person-fill me-1"></i> {{ auth()->user()->name }}
+                    </a>
                 </div>
             @else
                 <div class="d-flex flex-column flex-md-row gap-3">
                     <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#login">
                         Log in
                     </button>
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#register">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#register">
                         Sign up
                     </button>
                 </div>

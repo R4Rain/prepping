@@ -1,7 +1,7 @@
 <x-app title="My Recipes">
     <x-navbar></x-navbar>
 
-    <div class="container p-5">
+    <div class="container-lg p-5">
         <div class="row">
             <div class="col-4">
                 <x-sidebar></x-sidebar>
@@ -10,35 +10,26 @@
                 @if ($recipes->count() > 0)
                     <div class="card border-0 bg-white shadow-sm rounded-4">
                         <div class="card-body p-4">
-                            <h3 class="mb-4">My Recipes</h3>
+                            <h4 class="mb-4">My Recipes</h4>
 
                             @foreach ($recipes as $recipe)
                                 <a type="button" href="{{ route('recipes.show', $recipe) }}"
-                                    class="card rounded-4 text-decoration-none text-dark mb-3">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <img src="/storage/recipes/{{ $recipe->photo }}" class="rounded-3"
-                                                    width="100%">
-                                            </div>
-                                            <div class="col">
-                                                <h5>{{ $recipe->name }}</h5>
-                                                <span class="text-muted">
-                                                    <i class="bi bi-star-fill me-1"></i>
-                                                    @if ($recipe->ratings->count() > 0)
-                                                        {{ (float) $recipe->ratings->sum('value') / (float) $recipe->ratings->count() }}
-                                                    @else
-                                                        0
-                                                    @endif
-                                                    <i class="bi bi-dot"></i>
-                                                    {{ $recipe->collections->count() }} saved
-                                                    <i class="bi bi-dot"></i>
-                                                    {{ $recipe->comments->count() }}
-                                                    {{ $recipe->comments->count() > 1 ? 'comments' : 'comment' }}
-                                                </span>
-                                            </div>
-                                            <div class="col-1 my-auto text-center">
-                                                <i class="bi bi-chevron-right"></i>
+                                    class="recipe-card text-decoration-none text-dark mb-3">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <img src="/storage/recipes/{{ $recipe->photo }}" class="rounded-3"
+                                                width="100%">
+                                        </div>
+                                        <div class="col">
+                                            <p class="mb-2">{{ $recipe->name }}</p>
+                                            <div class="text-muted">
+                                                <i class="bi bi-star-fill me-1"></i>
+                                                {{ $recipe->ratings->count() > 0 ? $recipe->getRating($recipe) : '0' }}
+                                                <i class="bi bi-dot"></i>
+                                                {{ $recipe->collections->count() }} saved
+                                                <i class="bi bi-dot"></i>
+                                                {{ $recipe->comments->count() }}
+                                                {{ $recipe->comments->count() > 1 ? 'comments' : 'comment' }}
                                             </div>
                                         </div>
                                     </div>

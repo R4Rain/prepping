@@ -17,8 +17,8 @@
                                 <div class="col">
                                     <a href="{{ route('categories.show', $category) }}"
                                         class="text-decoration-none text-dark">
-                                        <div class="card rounded-3 bg-light h-100">
-                                            <div class="card-body">
+                                        <div class="card rounded-3 bg-light border-0 h-100">
+                                            <div class="card-body fw-semibold">
                                                 {{ $category->name }}
                                             </div>
                                         </div>

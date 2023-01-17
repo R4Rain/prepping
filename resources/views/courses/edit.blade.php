@@ -50,7 +50,7 @@
                                 <div class="text-muted mb-2">How long does it takes to finish the course?</div>
                                 <div class="input-group">
                                     <input type="number" class="form-control" name="estimated_finish" placeholder="0"
-                                    value="{{ $course->estimated_finish }}" required>
+                                        value="{{ $course->estimated_finish }}" required>
                                     <span class="input-group-text">hour(s)</span>
                                 </div>
                                 @error('estimated_finish')

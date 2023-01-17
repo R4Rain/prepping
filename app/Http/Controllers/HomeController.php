@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function __invoke()
     {
         return view('home', [
-            'recipes' => Recipe::take(8)->get(),
+            'recipes' => Recipe::take(6)->get(),
             'categories' => Category::all()
         ]);
     }

@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\CategoryDetail;
-use App\Models\Group;
-use App\Models\Rating;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +20,7 @@ class RecipeController extends Controller
     public function index()
     {   
         return view('recipes.index', [
-            'categories' => Category::all()->take(5),
+            'categories' => Category::all()->take(10),
             'recipes' => Recipe::all()
         ]);
     }
@@ -80,15 +78,17 @@ class RecipeController extends Controller
 
     public function show(Recipe $recipe)
     {   
-        $user_rating = null;
-        if(auth()->check()){
-            $user_id = auth()->user()->id;
-            $user_rating = $recipe->ratings()->where('user_id', $user_id)->first();
+        $saved = 0;   
+        foreach (auth()->user()->collections as $collection) {
+            if ($collection->recipes->where('id', $recipe->id)->count() > 0) {
+                $saved = 1;   
+            }
         }
+        
         return view('recipes.show', [
             'recipe' => $recipe,
-            'average_rate' => $recipe->ratings()->avg('value'),
-            'user_rating' => $user_rating,
+            'rated' => $recipe->ratings()->where('user_id', auth()->user()->id)->count() > 0 ? 1 : 0,
+            'saved' => $saved
         ]);
     }
 
@@ -117,8 +117,9 @@ class RecipeController extends Controller
 
     public function update(Request $request, Recipe $recipe)
     {
+       
         $this->validateRequest($request);
-
+    
         DB::transaction(function () use($request, $recipe) {
             if ($request->hasFile('photo')) {
                 if ($recipe->photo != NULL)
@@ -142,6 +143,20 @@ class RecipeController extends Controller
                 'prep_time' => $request->prep_hours * 60 + $request->prep_minutes,
                 'cook_time' => $request->cook_hours * 60 + $request->cook_minutes
             ]);
+
+            $data = [];
+            foreach ($request->categories as $category) {
+                $data[] = [
+                    'recipe_id' => $recipe->id,
+                    'category_id' => $category,
+                ]; 
+            }
+
+            foreach ($recipe->categories as $category) {
+                $category->delete();
+            }
+
+            CategoryDetail::insert($data);
         });
 
         return redirect()->route('recipes.show', $recipe);

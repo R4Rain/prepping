@@ -7,23 +7,27 @@
                 <x-sidebar></x-sidebar>
             </div>
             <div class="col">
-                <form method="POST" action="{{ route('subscriptions.store') }}">
-                    @csrf
-
-                    <div class="card border-0 bg-white shadow-sm rounded-4">
-                        <div class="card-body p-4">
-                            @if ($subscription)
-                                <h3 class="mb-4">My Subscription</h3>
-
-                                <div class="card rounded-4">
-                                    <div class="card-body p-4">
-                                        {{ date('F j, Y', strtotime($subscription->expiry)) }}
-                                    </div>
+                <div class="card border-0 bg-white shadow-sm rounded-4">
+                    <div class="card-body p-4">
+                        @if ($subscription)
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h4>My Subscription</h4>
+                                    <p>Ends on {{ date('F j, Y', strtotime($subscription->expiry)) }}</p>
                                 </div>
-                            @else
-                                <h3>Prepping Premium</h3>
+                                <button type="buton" data-bs-toggle="modal"
+                                    data-bs-target="#delete{{ $subscription->id }}"
+                                    class="btn btn-outline-secondary px-4 rounded-3">Cancel</button>
+                            </div>
+
+                            <x-delete :model='$subscription' name='subscriptions'></x-delete>
+                        @else
+                            <form method="POST" action="{{ route('subscriptions.store') }}">
+                                @csrf
+
+                                <h4>Prepping Premium</h4>
                                 <p class="text-muted">
-                                    Access all recipes and courses you want. Change or cancel your plan anytime.
+                                    Choose the best plan. Change or cancel your plan anytime.
                                 </p>
 
                                 <div class="row justify-content-center my-5" id="subs">
@@ -63,80 +67,81 @@
                                     <button id="btnSubscribe" class="btn btn-primary rounded-3 px-5"
                                         data-bs-toggle="modal" data-bs-target="#subscribe" disabled>Continue</button>
                                 </div>
-                            @endif
-                        </div>
-                    </div>
 
-                    <div class="modal fade" id="subscribe" tabindex="-1">
-                        <div class="modal-dialog">
-                            <div class="modal-content border-0 rounded-4">
-                                <div class="modal-body p-5">
-                                    <div class="mb-4 text-center">
-                                        <h4 class="mb-2">Payment</h4>
-                                        <small class="text-muted">Fill in your credit card information</small>
-                                    </div>
+                                <div class="modal fade" id="subscribe" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content border-0 rounded-4">
+                                            <div class="modal-body p-5">
+                                                <div class="mb-4 text-center">
+                                                    <h4 class="mb-2">Payment</h4>
+                                                    <small class="text-muted">Fill in your credit card
+                                                        information</small>
+                                                </div>
 
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="holder_name"
-                                            placeholder="Card Holder Name" required>
-                                        <label for="holder_name">Card Holder Name</label>
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="holder_name"
+                                                        placeholder="Card Holder Name" required>
+                                                    <label for="holder_name">Card Holder Name</label>
 
-                                        @error('holder_name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+                                                    @error('holder_name')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
 
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="card_number"
-                                            placeholder="Card Number" required>
-                                        <label for="card_number">Card Number</label>
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="card_number"
+                                                        placeholder="Card Number" required>
+                                                    <label for="card_number">Card Number</label>
 
-                                        @error('card_number')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
+                                                    @error('card_number')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
 
-                                    <div class="row g-3 mb-4">
-                                        <div class="col">
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="expiration"
-                                                    placeholder="MM/YY" required>
-                                                <label for="expiration">MM/YY</label>
+                                                <div class="row g-3 mb-4">
+                                                    <div class="col">
+                                                        <div class="form-floating mb-3">
+                                                            <input type="text" class="form-control" id="expiration"
+                                                                placeholder="MM/YY" required>
+                                                            <label for="expiration">MM/YY</label>
 
-                                                @error('expiration')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                                            @error('expiration')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-floating mb-3">
+                                                            <input type="text" class="form-control" id="cvv"
+                                                                placeholder="CVV" required>
+                                                            <label for="cvv">CVV</label>
+
+                                                            @error('cvv')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary rounded-3 w-100">
+                                                    {{ __('Pay') }}
+                                                </button>
                                             </div>
                                         </div>
-                                        <div class="col">
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="cvv"
-                                                    placeholder="CVV" required>
-                                                <label for="cvv">CVV</label>
-
-                                                @error('cvv')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
                                     </div>
-
-                                    <button type="submit" class="btn btn-primary rounded-3 w-100">
-                                        {{ __('Pay') }}
-                                    </button>
                                 </div>
-                            </div>
-                        </div>
+                            </form>
+                        @endif
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

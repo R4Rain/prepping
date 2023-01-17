@@ -12,11 +12,22 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {   
+        $recipes = Recipe::with('ratings')->get()->sortByDesc(function($recipe) { 
+            return $recipe->ratings->sum('value');
+        });
+
+        $creators = User::with('recipes')->get()->sortByDesc(function($user) { 
+            return $user->recipes->count();
+        });
+
+        
         return view('dashboard', [
-            'categories' => Category::all(),
-            'recipes' => Recipe::all(),
-            'courses' => Course::all(),
-            'users' => User::where('id', '!=', 1)->get()
+            'category_count' => Category::all()->count(),
+            'recipe_count' => Recipe::all()->count(),
+            'course_count' => Course::all()->count(),
+            'creator_count' => User::where('id', '!=', 1)->count(),
+            'recipes' => $recipes->take(3),
+            'creators' => $creators->take(3),
         ]);
     }
 }

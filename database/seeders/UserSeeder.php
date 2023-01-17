@@ -14,24 +14,28 @@ class UserSeeder extends Seeder
             [
                 'role' => 'ADMIN',
                 'name' => 'Admin',
+                'photo' => null,
                 'email' => 'admin@prepping.com',
                 'password' => Hash::make('admin123')
             ],
             [
                 'role' => 'CUSTOMER',
                 'name' => 'Blu Robbins',
+                'photo' => 'Blu Robbins.jpg',
                 'email' => 'blu@gmail.com',
                 'password' => Hash::make('abc123')
             ],
             [
                 'role' => 'CUSTOMER',
-                'name' => 'Aryan Morse',
-                'email' => 'aryan@gmail.com',
+                'name' => 'Song Hye Kyo',
+                'photo' => 'Song Hye Kyo.jpg',
+                'email' => 'song@gmail.com',
                 'password' => Hash::make('abc123')
             ],
             [
                 'role' => 'CUSTOMER',
                 'name' => 'Taya Reese',
+                'photo' => 'Taya Reese.jpg',
                 'email' => 'taya@gmail.com',
                 'password' => Hash::make('abc123')
             ]

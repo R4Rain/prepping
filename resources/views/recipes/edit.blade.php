@@ -11,7 +11,7 @@
 
                             <div class="d-flex justify-content-between align-items-center bg-white py-4 mb-5 sticky-top">
                                 <h4 class="m-0">
-                                    <a href="{{ route('home') }}" class="text-dark">
+                                    <a href="{{ route('recipes.show', $recipe) }}" class="text-dark">
                                         <i class="bi bi-arrow-left me-2"></i></a>
                                     Edit Recipe
                                 </h4>
@@ -36,8 +36,7 @@
                                         width="100%">
                                     <img id="img-preview" class="rounded-3" width="100%" src="#" hidden>
 
-                                    <input type="file" id="photo" name="photo" class="form-control mt-3"
-                                        required>
+                                    <input type="file" id="photo" name="photo" class="form-control mt-3">
                                 </div>
 
                                 <div class="mb-5">
@@ -88,7 +87,7 @@
                                 <div class="mb-5">
                                     <h5>Servings</h5>
                                     <div class="text-muted mb-2">How many portions does this recipe make?</div>
-                                    <input type="number" class="form-control" name="servings" placeholder="0"
+                                    <input type="number" class="form-control" name="servings"
                                         value="{{ $recipe->servings }}" required>
 
                                     @error('servings')
@@ -104,14 +103,14 @@
                                             <div class="input-group">
                                                 <span class="input-group-text">Hours</span>
                                                 <input type="number" class="form-control" name="prep_hours"
-                                                    value="{{ $recipe->prep_hours }}" placeholder="0">
+                                                    value="{{ $recipe->getHours($recipe->prep_time) }}">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="input-group">
                                                 <span class="input-group-text">Minutes</span>
                                                 <input type="number" class="form-control" name="prep_minutes"
-                                                    value="{{ $recipe->prep_minutes }}" placeholder="0">
+                                                    value="{{ $recipe->getMinutes($recipe->prep_time) }}">
                                             </div>
                                         </div>
                                     </div>
@@ -125,14 +124,14 @@
                                             <div class="input-group">
                                                 <span class="input-group-text">Hours</span>
                                                 <input type="number" class="form-control" name="cook_hours"
-                                                    value="{{ $recipe->cook_hours }}" placeholder="0">
+                                                    value="{{ $recipe->getHours($recipe->cook_time) }}">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="input-group">
                                                 <span class="input-group-text">Minutes</span>
                                                 <input type="number" class="form-control" name="cook_minutes"
-                                                    value="{{ $recipe->cook_minutes }}" placeholder="0">
+                                                    value="{{ $recipe->getMinutes($recipe->cook_time) }}">
                                             </div>
                                         </div>
                                     </div>
