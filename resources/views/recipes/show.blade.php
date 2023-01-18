@@ -32,10 +32,10 @@
                                         <div>
                                             <i class="bi bi-clock text-primary me-1"></i>
                                             <span class="me-2">
-                                                <span class="text-muted">Prep: </span>{{ $recipe->prep_time }}mins
+                                                <span class="text-muted">Prep: </span>{{ $recipe->prep_time }} mins
                                             </span>
                                             <span>
-                                                <span class="text-muted">Cook: </span>{{ $recipe->cook_time }}mins
+                                                <span class="text-muted">Cook: </span>{{ $recipe->cook_time }} mins
                                             </span>
                                         </div>
                                         <div>

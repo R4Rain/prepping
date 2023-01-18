@@ -25,7 +25,7 @@ class FeedController extends Controller
             'community_detail_id' => $request->community_detail_id
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Successfully created a feed!');
     }
 
     public function show(Feed $feed)
@@ -47,6 +47,6 @@ class FeedController extends Controller
     {
         $feed->delete();
         
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Successfully deleted a feed!');
     }
 }

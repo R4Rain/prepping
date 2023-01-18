@@ -32,7 +32,7 @@ class LessonController extends Controller
             'course_id' => $course->id,
         ]);
 
-        return redirect()->route('courses.show', $course);
+        return redirect()->route('courses.show', $course)->with('success', 'Successfully created a lesson!');
     }
 
     public function show(Course $course, Lesson $lesson)
@@ -89,13 +89,13 @@ class LessonController extends Controller
             'content' => $request->content,
         ]);
         
-        return redirect()->route('courses.edit', $lesson->course);
+        return redirect()->route('courses.edit', $lesson->course)->with('success', 'Successfully updated a lesson!');
     }
 
     public function destroy(Course $course, Lesson $lesson)
     {
         $lesson->delete();
-        return redirect()->route('courses.show', $course);
+        return redirect()->route('courses.show', $course)->with('success', 'Successfully deleted a lesson!');
     }
 
     public function validateRequest(Request $request)

@@ -39,7 +39,7 @@ class SubscriptionController extends Controller
             'expiry' => $expiry
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Subscription is activated!');
     }
 
     public function show(Subscription $subscription)
@@ -61,6 +61,6 @@ class SubscriptionController extends Controller
     {
         $subscription->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Subscription is canceled!');
     }
 }

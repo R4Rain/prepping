@@ -40,7 +40,7 @@
 
                             <div class="mb-5">
                                 <h5>Content</h5>
-                                <textarea id="content" name="content" class="form-control" rows='3'>{{ $lesson->content }}</textarea>
+                                <textarea id="instructions" placeholder="Write some text here" name="content" class="form-control" rows='3'>{{ $lesson->content }}</textarea>
 
                                 @error('content')
                                     <small class="text-danger">{{ $message }}</small>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Community;
+use App\Models\CommunityDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,7 +12,7 @@ class CommunityController extends Controller
     public function __construct()
     {
         $this->middleware(['auth'])->except('index');
-        $this->middleware(['user'])->only('index', 'show');
+        $this->middleware(['user'])->only('show');
         $this->middleware(['premiumUser'])->only('create', 'store', 'edit', 'update', 'destroy');
     }
 
@@ -37,14 +38,19 @@ class CommunityController extends Controller
             $request->file('photo')->storeAs('public/communities', $proofNameToStore);
         }
 
-        Community::create([
+        $community = Community::create([
             'user_id' => auth()->user()->id,
             'name' => $request->name,
             'photo' => $proofNameToStore,
             'description' => $request->description
         ]);
 
-        return redirect()->route('communities.index');
+        CommunityDetail::create([
+            'community_id' => $community->id,
+            'user_id' => auth()->user()->id,
+        ]);
+
+        return redirect()->route('communities.index')->with('success', 'Successfully created a community!');
     }
 
     public function show(Community $community)
@@ -83,7 +89,7 @@ class CommunityController extends Controller
             'description' => $request->description
         ]);
 
-        return redirect()->route('communities.show', $community);
+        return redirect()->route('communities.show', $community)->with('success', 'Successfully updated the community!');
     }
 
     public function destroy(Community $community)

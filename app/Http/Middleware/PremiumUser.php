@@ -20,7 +20,7 @@ class PremiumUser
         $subcription = Subscription::where([['user_id', auth()->user()->id], ['expiry', '>', time()]])->first();
 
         if (!$subcription) {
-            return redirect()->route('subscriptions.index');
+            return redirect()->route('subscriptions.index')->with('error', 'Only premium user allowed!');
         }
         
         return $next($request);

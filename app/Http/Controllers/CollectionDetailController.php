@@ -47,7 +47,7 @@ class CollectionDetailController extends Controller
 
         CollectionDetail::insert($data);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Successfully added the recipe!');
     }
 
     /**
@@ -94,6 +94,6 @@ class CollectionDetailController extends Controller
     {   
         CollectionDetail::where([['recipe_id', $recipe->id], ['collection_id', $collection->id]])->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Successfully deleted the recipe!');
     }
 }

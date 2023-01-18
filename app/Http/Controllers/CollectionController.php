@@ -30,7 +30,7 @@ class CollectionController extends Controller
             'name' => $request->name
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Successfully created a collection!');
     }
 
     public function show(Collection $collection)

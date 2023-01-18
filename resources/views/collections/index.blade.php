@@ -14,7 +14,7 @@
 
                             @foreach ($collections as $collection)
                                 <a type="button" href="{{ route('collections.show', $collection) }}"
-                                    class="card collection-card rounded-4 text-decoration-none text-dark">
+                                    class="card collection-card rounded-4 text-decoration-none text-dark mb-3">
                                     <div class="card-body p-4">
                                         <h5 class="fw-semibold">{{ $collection->name }}</h5>
                                         <small>{{ $collection->recipes->count() }} recipes</small>

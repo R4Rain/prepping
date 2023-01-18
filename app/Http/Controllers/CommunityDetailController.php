@@ -15,13 +15,13 @@ class CommunityDetailController extends Controller
             'user_id' => auth()->user()->id,
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Successfully joined the community!');
     }
 
     public function destroy(Community $community)
     {
         CommunityDetail::where([['user_id', auth()->user()->id], ['community_id', $community->id]])->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Successfully left the community!');
     }
 }

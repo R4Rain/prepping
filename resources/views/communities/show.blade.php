@@ -104,7 +104,7 @@
 
         <form method="POST" action="{{ route('feeds.store') }}">
             @csrf
-
+            
             <input type="hidden" value="{{ auth()->user()->isMember($community->id)->id }}"
                 name="community_detail_id">
 

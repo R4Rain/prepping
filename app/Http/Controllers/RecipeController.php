@@ -83,7 +83,7 @@ class RecipeController extends Controller
             CategoryDetail::insert($data);
         });
         
-        return redirect()->route('recipes.index');
+        return redirect()->route('recipes.index')->with('success', 'Successfully created a recipe!');
     }
 
     public function show(Recipe $recipe)
@@ -169,7 +169,7 @@ class RecipeController extends Controller
             CategoryDetail::insert($data);
         });
 
-        return redirect()->route('recipes.show', $recipe);
+        return redirect()->route('recipes.show', $recipe)->with('success', 'Successfully updated a recipe!');
     }
 
     public function destroy(Recipe $recipe)
@@ -179,7 +179,7 @@ class RecipeController extends Controller
 
         $recipe->delete();
 
-        return redirect()->route('recipes.index');
+        return redirect()->route('recipes.index')->with('success', 'Successfully deleted a recipe!');
     }
 
     public function validateRequest(Request $request)

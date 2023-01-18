@@ -49,7 +49,7 @@ class CourseController extends Controller
             'estimated_finish' => $request->estimated_finish,
             'description' => $request->description,
         ]);
-        return redirect()->route('courses.manage');
+        return redirect()->route('courses.manage')->with('success', 'Successfully created a course!');
     }
 
     public function show(Course $course)
@@ -93,7 +93,7 @@ class CourseController extends Controller
             'estimated_finish' => $request->estimated_finish,
             'photo' => $proofNameToStore,
         ]);
-        return redirect()->route('courses.manage');
+        return redirect()->route('courses.manage')->with('success', 'Successfully updated a course!');
     }
 
     public function destroy(Course $course)
@@ -103,7 +103,7 @@ class CourseController extends Controller
         }
         $course->delete();
         
-        return redirect()->route('courses.index');
+        return redirect()->route('courses.index')->with('success', 'Successfully deleted a course!');
     }
 
     public function validateRequest(Request $request)

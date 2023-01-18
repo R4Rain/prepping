@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="col offset-1 my-auto">
-                    <h1 class="mb-4">Subscirbe to Prepping Premium</h1>
+                    <h1 class="mb-4">Subscribe to Prepping Premium</h1>
                     <ul class="fs-5">
                         <li>Unlimited recipe creation</li>
                         <li>Full access to all courses</li>

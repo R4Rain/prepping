@@ -31,6 +31,6 @@ class ProfileController extends Controller
             'photo' => $proofNameToStore
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Successfully updated the profile!');
     }
 }

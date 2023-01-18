@@ -24,7 +24,7 @@ class RatingController extends Controller
             'recipe_id' => $request->recipe_id,
             'value' => $request->value,
         ]);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Successfully rate!');
     }
 
     public function show(Rating $rating)
