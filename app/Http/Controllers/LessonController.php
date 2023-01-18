@@ -79,17 +79,17 @@ class LessonController extends Controller
         ]);
     }
 
-    public function update(Request $request, Course $course, Lesson $lesson)
-    {
+    public function update(Request $request, Lesson $lesson)
+    {   
         $this->validateRequest($request);
-
+        
         $lesson->update([
             'title' => $request->title,
             'subtitle' => $request->subtitle,
             'content' => $request->content,
         ]);
-
-        return redirect()->route('courses.show', $course);
+        
+        return redirect()->route('courses.edit', $lesson->course);
     }
 
     public function destroy(Course $course, Lesson $lesson)

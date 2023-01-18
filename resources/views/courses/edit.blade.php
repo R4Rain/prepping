@@ -1,5 +1,5 @@
 <x-app title="Edit Course">
-    <x-navbar></x-navbar>
+    <x-navbar-admin></x-navbar-admin>
 
     <div class="container-fluid p-5">
         <div class="row justify-content-center">
@@ -15,8 +15,16 @@
                                     Edit Course
                                 </h4>
 
-                                @method('put')
-                                <button type="submit" class="btn btn-primary rounded-3 px-4">Save</button>
+                                <div class="d-flex gap-2">
+                                    <button type="button" data-bs-toggle="modal"
+                                        data-bs-target="#delete{{ $course->id }}"
+                                        class="btn btn-outline-light rounded-3">
+                                        Delete
+                                    </button>
+
+                                    @method('put')
+                                    <button type="submit" class="btn btn-primary rounded-3 px-4">Save</button>
+                                </div>
                             </div>
 
                             <div class="mb-5">
@@ -46,7 +54,7 @@
                             </div>
 
                             <div class="mb-5">
-                                <h5>Estimated hours to finish<small class="text-danger ms-1">*</small></h5>
+                                <h5>Estimated hours to finish</h5>
                                 <div class="text-muted mb-2">How long does it takes to finish the course?</div>
                                 <div class="input-group">
                                     <input type="number" class="form-control" name="estimated_finish" placeholder="0"
@@ -57,10 +65,27 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
+
+                            <div>
+                                <h5>Lessons</h5>
+                                @foreach ($course->lessons as $index => $lesson)
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                            <span class="me-3">{{ $index + 1 }}</span>{{ $lesson->title }}
+                                        </div>
+                                        <div class="col text-end">
+                                            <a href="{{ route('lessons.edit', $lesson) }}"
+                                                class="btn btn-primary btn-sm rounded-3">Edit</a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <x-delete :model='$course' name='courses'></x-delete>
 </x-app>

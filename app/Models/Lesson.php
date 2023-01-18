@@ -16,4 +16,8 @@ class Lesson extends Model
     public function lessonStatus(){
         return $this->hasMany(LessonStatus::class);
     }
+
+    public function course(){
+        return $this->belongsTo(Course::class);
+    }
 }
