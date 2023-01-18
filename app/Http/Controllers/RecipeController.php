@@ -161,11 +161,9 @@ class RecipeController extends Controller
                     'category_id' => $category,
                 ]; 
             }
-
             foreach ($recipe->categories as $category) {
-                $category->delete();
+                $category->categoryDetails()->where('recipe_id', $recipe->id)->delete();
             }
-
             CategoryDetail::insert($data);
         });
 
