@@ -30,9 +30,9 @@
                                     Choose the best plan. Change or cancel your plan anytime.
                                 </p>
 
-                                <div class="row justify-content-center my-5" id="subs">
+                                <div class="row justify-content-center my-5">
                                     <div class="col-3">
-                                        <label for="gold" class="card rounded-4 h-100">
+                                        <label for="gold" class="card card-subscription rounded-4 h-100">
                                             <div class="card-body py-4 text-center">
                                                 <h5 class="mb-3">Gold</h5>
                                                 <h5 class="text-primary">$6.99</h5>

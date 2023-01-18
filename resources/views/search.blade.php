@@ -7,8 +7,13 @@
                 <div class="card border-0 rounded-4 shadow-sm">
                     <div class="card-body p-5">
                         <h4 class="mb-4">'{{ request('search') }}' search results</h4>
+
+                        <div>
+
+                        </div>
+
                         @if ($recipes->count() > 0)
-                            <div class="row row-cols-4">
+                            <div class="row row-cols-3 gy-5 gx-4">
                                 @foreach ($recipes as $recipe)
                                     <div class="col">
                                         <x-recipe :recipe='$recipe' />

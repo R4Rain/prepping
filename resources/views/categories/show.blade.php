@@ -9,7 +9,7 @@
                         <h2 class="mb-4">{{ $category->name }}</h2>
 
                         @if ($category->recipes->count() > 0)
-                            <div class="row row-cols-4 g-3">
+                            <div class="row row-cols-3 gy-5 gx-4">
                                 @foreach ($category->recipes as $recipe)
                                     <div class="col">
                                         <x-recipe :recipe='$recipe'></x-recipe>

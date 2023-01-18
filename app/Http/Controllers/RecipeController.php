@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\PremiumUser;
 use App\Models\Category;
 use App\Models\CategoryDetail;
 use App\Models\Recipe;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +35,11 @@ class RecipeController extends Controller
     }
 
     public function create()
-    {
+    {   
+        if($this->validateAccess() == false) {
+            return redirect()->route('subscriptions.index');
+        }
+        
         return view('recipes.create', [
             'categories' => Category::orderBy('name', 'asc')->get()
         ]);
@@ -41,6 +47,10 @@ class RecipeController extends Controller
 
     public function store(Request $request)
     {   
+        if($this->validateAccess() == false) {
+            return redirect()->route('subscriptions.index');
+        }
+        
         $this->validateRequest($request);
 
         DB::transaction(function () use($request) {
@@ -183,5 +193,12 @@ class RecipeController extends Controller
             'servings' => 'required|integer',
             'photo' => 'image|mimes:jpeg,jpg,png,webp'
         ]);
+    }
+
+    public function validateAccess()
+    {
+        $subcription = Subscription::where([['user_id', auth()->user()->id], ['expiry', '>', time()]])->first();
+        
+        return auth()->user()->recipes->count() >= 5 && !$subcription ? false : true;
     }
 }
